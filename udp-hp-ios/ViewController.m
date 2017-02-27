@@ -70,12 +70,12 @@ void recd(size_t bytes_recd, socklen_t addr_len, char *w) {
 }
 
 void coll_buf(char *w) {
-    printf("%s", w);
+    printf("%s\n", w);
     wlog([NSString stringWithUTF8String:w]);
 }
 
 void new_client(char *w) {
-    printf("%s", w);
+    printf("%s\n", w);
     wlog([NSString stringWithUTF8String:w]);
 }
 
