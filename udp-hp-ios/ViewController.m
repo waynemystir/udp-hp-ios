@@ -23,11 +23,13 @@ void wlog(NSString *w) {
         return;
     }
     
-    unichar last = [vcs.daConsole.text characterAtIndex:[vcs.daConsole.text length] - 1];
-    NSString *s = last == '\n' ? @"" : @"\n";
+//    unichar last = [vcs.daConsole.text characterAtIndex:([vcs.daConsole.text length] - 1)];
+    NSString *s = /*last == '\n' ? @"" :*/ @"\n";
     
     dispatch_async(dispatch_get_main_queue(), ^{
         [vcs.daConsole setText:[NSString stringWithFormat:@"%@%@%@", vcs.daConsole.text, s, w]];
+        NSRange bottom = NSMakeRange(vcs.daConsole.text.length - 1, 1);
+        [vcs.daConsole scrollRangeToVisible:bottom];
     });
     
 }
@@ -80,12 +82,30 @@ void new_client(char *w) {
 }
 
 void confirmed_client() {
-    char *w = "Confirmed client\n";
-    printf("%s", w);
+    char *w = "Confirmed client";
+    printf("%s\n", w);
     wlog([NSString stringWithUTF8String:w]);
 }
 
 void new_peer(char *w) {
+    printf("%s", w);
+    wlog([NSString stringWithUTF8String:w]);
+}
+
+void hole_punch_sent(char *w, int t) {
+    char wc [256];
+    sprintf(wc, "%s count %d", w, t);
+    printf("%s\n", wc);
+    wlog([NSString stringWithUTF8String:wc]);
+}
+
+void confirmed_peer_while_punching(void) {
+    char w[] = "*$*$*$*$*$*$*$*$*$*$*$*$* CPWP";
+    printf("%s\n", w);
+    wlog([NSString stringWithUTF8String:w]);
+}
+
+void from_peer(char *w) {
     printf("%s", w);
     wlog([NSString stringWithUTF8String:w]);
 }
@@ -110,15 +130,25 @@ void end_while(void) {
     wlog([NSString stringWithUTF8String:w]);
 }
 
-@interface ViewController ()
+@interface ViewController () <UITextViewDelegate>
 
 @end
 
 @implementation ViewController
 
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+    if( [text rangeOfCharacterFromSet:[NSCharacterSet newlineCharacterSet]].location == NSNotFound ) {
+        return YES;
+    }
+    
+    [textView resignFirstResponder];
+    return NO;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     vcs = self;
+    self.daConsole.delegate = self;
     // Do any additional setup after loading the view, typically from a nib.
 }
 
@@ -143,9 +173,20 @@ void end_while(void) {
              new_client,
              confirmed_client,
              new_peer,
+             hole_punch_sent,
+             confirmed_peer_while_punching,
+             from_peer,
              unhandled_response_from_server,
              whilew,
              end_while);
+    });
+}
+
+- (IBAction)tapPingAllPeers:(id)sender {
+    ((UIButton *)sender).backgroundColor = [UIColor purpleColor];
+    wlog(@"tapPingAllPeers");
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        ping_all_peers();
     });
 }
 
