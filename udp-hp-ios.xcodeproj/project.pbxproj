@@ -17,6 +17,7 @@
 		B01C67771E632F3D0026DC81 /* network_utils.c in Sources */ = {isa = PBXBuildFile; fileRef = B01C67731E632F3D0026DC81 /* network_utils.c */; };
 		B01C67781E632F3D0026DC81 /* udp_client.c in Sources */ = {isa = PBXBuildFile; fileRef = B01C67751E632F3D0026DC81 /* udp_client.c */; };
 		B091E50B1E690CB90009F3CD /* node.c in Sources */ = {isa = PBXBuildFile; fileRef = B091E5091E690CB90009F3CD /* node.c */; };
+		B091E50E1E6E728C0009F3CD /* common.c in Sources */ = {isa = PBXBuildFile; fileRef = B091E50D1E6E728C0009F3CD /* common.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +40,7 @@
 		B091E5091E690CB90009F3CD /* node.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = node.c; path = "../../udp-hp/common/node.c"; sourceTree = "<group>"; };
 		B091E50A1E690CB90009F3CD /* node.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = node.h; path = "../../udp-hp/common/node.h"; sourceTree = "<group>"; };
 		B091E50C1E6BA5740009F3CD /* common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = common.h; path = "../../udp-hp/common/common.h"; sourceTree = "<group>"; };
+		B091E50D1E6E728C0009F3CD /* common.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = common.c; path = "../../udp-hp/common/common.c"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +86,7 @@
 				B01C67751E632F3D0026DC81 /* udp_client.c */,
 				B01C67761E632F3D0026DC81 /* udp_client.h */,
 				B091E50C1E6BA5740009F3CD /* common.h */,
+				B091E50D1E6E728C0009F3CD /* common.c */,
 				B091E5091E690CB90009F3CD /* node.c */,
 				B091E50A1E690CB90009F3CD /* node.h */,
 				B01C676A1E62BD9E0026DC81 /* udp_dev.c */,
@@ -175,6 +178,7 @@
 			files = (
 				B01C675B1E62B66C0026DC81 /* ViewController.m in Sources */,
 				B01C676C1E62BD9E0026DC81 /* udp_dev.c in Sources */,
+				B091E50E1E6E728C0009F3CD /* common.c in Sources */,
 				B01C67781E632F3D0026DC81 /* udp_client.c in Sources */,
 				B01C67581E62B66C0026DC81 /* AppDelegate.m in Sources */,
 				B01C67551E62B66C0026DC81 /* main.m in Sources */,
@@ -245,7 +249,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -286,7 +290,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;

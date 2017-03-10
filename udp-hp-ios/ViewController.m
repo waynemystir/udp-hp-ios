@@ -34,9 +34,11 @@ void wlog(NSString *w) {
     
 }
 
-void self_info(char *w) {
-    printf("%s\n", w);
-    wlog([NSString stringWithUTF8String:w]);
+void self_info(char *w, unsigned short port, unsigned short chat_port, unsigned short family) {
+    char e[256];
+    sprintf(e, "self: %s p:%d cp:%d f:%d", w, port, chat_port, family);
+    printf("%s\n", e);
+    wlog([NSString stringWithUTF8String:e]);
 }
 
 void server_info(char *w) {
@@ -76,7 +78,18 @@ void coll_buf(char *w) {
     wlog([NSString stringWithUTF8String:w]);
 }
 
-void new_client(char *w) {
+void new_client(SERVER_TYPE st, char *w) {
+    char st_str[15];
+    str_from_server_type(st, st_str);
+    printf("%s %s\n", st_str, w);
+    wlog([NSString stringWithUTF8String:w]);
+}
+
+void stay_touch_recd(SERVER_TYPE st) {
+    char st_str[15];
+    str_from_server_type(st, st_str);
+    char w[256];
+    sprintf(w, "stay_touch_recd %s", st_str);
     printf("%s\n", w);
     wlog([NSString stringWithUTF8String:w]);
 }
@@ -172,6 +185,7 @@ void end_while(void) {
              coll_buf,
              new_client,
              confirmed_client,
+             stay_touch_recd,
              new_peer,
              hole_punch_sent,
              confirmed_peer_while_punching,
