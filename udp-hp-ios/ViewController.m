@@ -81,8 +81,10 @@ void coll_buf(char *w) {
 void new_client(SERVER_TYPE st, char *w) {
     char st_str[15];
     str_from_server_type(st, st_str);
-    printf("%s %s\n", st_str, w);
-    wlog([NSString stringWithUTF8String:w]);
+    char e[256];
+    sprintf(e, "new_client %s %s", st_str, w);
+    printf("%s\n", e);
+    wlog([NSString stringWithUTF8String:e]);
 }
 
 void stay_touch_recd(SERVER_TYPE st) {
@@ -112,15 +114,38 @@ void hole_punch_sent(char *w, int t) {
     wlog([NSString stringWithUTF8String:wc]);
 }
 
-void confirmed_peer_while_punching(void) {
-    char w[] = "*$*$*$*$*$*$*$*$*$*$*$*$* CPWP";
+void confirmed_peer_while_punching(SERVER_TYPE st) {
+    char w[256];
+    switch (st) {
+        case SERVER_SIGNIN: {
+            strcpy(w, "*$*$*$*$*$*$*$*$*$*$*$*$*");
+            break;
+        }
+        case SERVER_CHAT: {
+            strcpy(w, "@-@-@-@-@-@-@-@-@-@-@-@-@");
+            break;
+        }
+        default:
+            break;
+    }
     printf("%s\n", w);
     wlog([NSString stringWithUTF8String:w]);
 }
 
-void from_peer(char *w) {
-    printf("%s", w);
-    wlog([NSString stringWithUTF8String:w]);
+void from_peer(SERVER_TYPE st, char *w) {
+    char st_str[15];
+    str_from_server_type(st, st_str);
+    char e[256];
+    sprintf(e, "from_peer %s %s", st_str, w);
+    printf("%s\n", e);
+    wlog([NSString stringWithUTF8String:e]);
+}
+
+void chat_msg(char *w) {
+    char e[256];
+    sprintf(e, "$#$#$#$#$#$# %s", w);
+    printf("%s\n", e);
+    wlog([NSString stringWithUTF8String:e]);
 }
 
 void unhandled_response_from_server(int w) {
@@ -190,6 +215,7 @@ void end_while(void) {
              hole_punch_sent,
              confirmed_peer_while_punching,
              from_peer,
+             chat_msg,
              unhandled_response_from_server,
              whilew,
              end_while);
@@ -202,6 +228,14 @@ void end_while(void) {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         ping_all_peers();
     });
+}
+
+- (IBAction)tapSendMessageAllPeers:(id)sender {
+    ((UIButton *)sender).backgroundColor = [UIColor purpleColor];
+    wlog(@"tapPingAllPeers");
+    char w[32];
+    strcpy(w, "hi-de-ho neighbor");
+    send_message_to_all_peers(w);
 }
 
 - (void)didReceiveMemoryWarning {
