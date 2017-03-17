@@ -9,6 +9,7 @@
 #import "ViewController.h"
 #import "udp_dev.h"
 #import "udp_client.h"
+#import "ObjcContact.h"
 
 static ViewController *vcs;
 
@@ -83,6 +84,13 @@ void new_client(SERVER_TYPE st, char *w) {
     str_from_server_type(st, st_str);
     char e[256];
     sprintf(e, "new_client %s %s", st_str, w);
+    printf("%s\n", e);
+    wlog([NSString stringWithUTF8String:e]);
+}
+
+void notify_existing_contact(char *w) {
+    char e[256];
+    sprintf(e, "EXISTING_CONTACT:%s", w);
     printf("%s\n", e);
     wlog([NSString stringWithUTF8String:e]);
 }
@@ -170,6 +178,8 @@ void end_while(void) {
 
 @interface ViewController () <UITextViewDelegate>
 
+@property (nonatomic, strong) NSMutableArray *arrContacts;
+
 @end
 
 @implementation ViewController
@@ -210,6 +220,7 @@ void end_while(void) {
              coll_buf,
              new_client,
              confirmed_client,
+             notify_existing_contact,
              stay_touch_recd,
              new_peer,
              hole_punch_sent,
@@ -236,6 +247,28 @@ void end_while(void) {
     char w[32];
     strcpy(w, "hi-de-ho neighbor");
     send_message_to_all_peers(w);
+}
+
+- (IBAction)tapListContacts:(id)sender {
+    ((UIButton *)sender).backgroundColor = [UIColor purpleColor];
+    wlog(@"tapListContacts");
+    contact_list_t *contacts;
+    list_contacts(&contacts);
+    if (!contacts) {
+        wlog(@"NO CONTACTS");
+        return;
+    }
+    self.arrContacts = [@[] mutableCopy];
+    contact_t *c = contacts->head;
+    while (c) {
+        ObjcContact *oc = [ObjcContact new];
+        oc.theContact = c;
+        [self.arrContacts addObject:oc];
+        c = c->next;
+    }
+    for (ObjcContact *oc in self.arrContacts) {
+        wlog([NSString stringWithFormat:@"Da Contact is %@", [oc username]]);
+    }
 }
 
 - (void)didReceiveMemoryWarning {
