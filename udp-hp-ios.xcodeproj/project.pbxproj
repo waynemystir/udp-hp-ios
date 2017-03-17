@@ -20,6 +20,9 @@
 		B091E50E1E6E728C0009F3CD /* common.c in Sources */ = {isa = PBXBuildFile; fileRef = B091E50D1E6E728C0009F3CD /* common.c */; };
 		B0B64EA41E78E9F300C6C807 /* hashtable.c in Sources */ = {isa = PBXBuildFile; fileRef = B0B64EA21E78E9F300C6C807 /* hashtable.c */; };
 		B0B64EA71E7B750000C6C807 /* ObjcContact.m in Sources */ = {isa = PBXBuildFile; fileRef = B0B64EA61E7B750000C6C807 /* ObjcContact.m */; };
+		B0B64EAA1E7C2B5500C6C807 /* ListContactsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0B64EA91E7C2B5500C6C807 /* ListContactsViewController.m */; };
+		B0B64EAE1E7C384C00C6C807 /* ContactViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0B64EAC1E7C384C00C6C807 /* ContactViewController.m */; };
+		B0B64EAF1E7C384C00C6C807 /* ContactViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B0B64EAD1E7C384C00C6C807 /* ContactViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +50,11 @@
 		B0B64EA31E78E9F300C6C807 /* hashtable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = hashtable.h; path = "../../udp-hp/common/hashtable.h"; sourceTree = "<group>"; };
 		B0B64EA51E7B750000C6C807 /* ObjcContact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjcContact.h; sourceTree = "<group>"; };
 		B0B64EA61E7B750000C6C807 /* ObjcContact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjcContact.m; sourceTree = "<group>"; };
+		B0B64EA81E7C2B5500C6C807 /* ListContactsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ListContactsViewController.h; path = ../ListContactsViewController.h; sourceTree = "<group>"; };
+		B0B64EA91E7C2B5500C6C807 /* ListContactsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ListContactsViewController.m; path = ../ListContactsViewController.m; sourceTree = "<group>"; };
+		B0B64EAB1E7C384C00C6C807 /* ContactViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactViewController.h; sourceTree = "<group>"; };
+		B0B64EAC1E7C384C00C6C807 /* ContactViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactViewController.m; sourceTree = "<group>"; };
+		B0B64EAD1E7C384C00C6C807 /* ContactViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContactViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +91,11 @@
 				B01C67571E62B66C0026DC81 /* AppDelegate.m */,
 				B01C67591E62B66C0026DC81 /* ViewController.h */,
 				B01C675A1E62B66C0026DC81 /* ViewController.m */,
+				B0B64EA81E7C2B5500C6C807 /* ListContactsViewController.h */,
+				B0B64EA91E7C2B5500C6C807 /* ListContactsViewController.m */,
+				B0B64EAB1E7C384C00C6C807 /* ContactViewController.h */,
+				B0B64EAC1E7C384C00C6C807 /* ContactViewController.m */,
+				B0B64EAD1E7C384C00C6C807 /* ContactViewController.xib */,
 				B01C675C1E62B66C0026DC81 /* Main.storyboard */,
 				B01C675F1E62B66C0026DC81 /* Assets.xcassets */,
 				B01C67611E62B66C0026DC81 /* LaunchScreen.storyboard */,
@@ -174,6 +187,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B01C67631E62B66C0026DC81 /* LaunchScreen.storyboard in Resources */,
+				B0B64EAF1E7C384C00C6C807 /* ContactViewController.xib in Resources */,
 				B01C67601E62B66C0026DC81 /* Assets.xcassets in Resources */,
 				B01C675E1E62B66C0026DC81 /* Main.storyboard in Resources */,
 			);
@@ -187,9 +201,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				B0B64EA71E7B750000C6C807 /* ObjcContact.m in Sources */,
+				B0B64EAE1E7C384C00C6C807 /* ContactViewController.m in Sources */,
 				B01C675B1E62B66C0026DC81 /* ViewController.m in Sources */,
 				B01C676C1E62BD9E0026DC81 /* udp_dev.c in Sources */,
 				B091E50E1E6E728C0009F3CD /* common.c in Sources */,
+				B0B64EAA1E7C2B5500C6C807 /* ListContactsViewController.m in Sources */,
 				B01C67781E632F3D0026DC81 /* udp_client.c in Sources */,
 				B01C67581E62B66C0026DC81 /* AppDelegate.m in Sources */,
 				B0B64EA41E78E9F300C6C807 /* hashtable.c in Sources */,

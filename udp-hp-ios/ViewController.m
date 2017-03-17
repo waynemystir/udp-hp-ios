@@ -10,6 +10,7 @@
 #import "udp_dev.h"
 #import "udp_client.h"
 #import "ObjcContact.h"
+#import "ListContactsViewController.h"
 
 static ViewController *vcs;
 
@@ -93,6 +94,21 @@ void notify_existing_contact(char *w) {
     sprintf(e, "EXISTING_CONTACT:%s", w);
     printf("%s\n", e);
     wlog([NSString stringWithUTF8String:e]);
+    
+    contact_list_t *contacts;
+    list_contacts(&contacts);
+    if (!contacts) {
+        wlog(@"NO CONTACTS");
+        return;
+    }
+    contact_t *c = contacts->head;
+    vcs.arrContacts = [@[] mutableCopy];
+    while (c) {
+        ObjcContact *oc = [ObjcContact new];
+        oc.theContact = c;
+        [vcs.arrContacts addObject:oc];
+        c = c->next;
+    }
 }
 
 void stay_touch_recd(SERVER_TYPE st) {
@@ -178,7 +194,6 @@ void end_while(void) {
 
 @interface ViewController () <UITextViewDelegate>
 
-@property (nonatomic, strong) NSMutableArray *arrContacts;
 
 @end
 
@@ -197,6 +212,7 @@ void end_while(void) {
     [super viewDidLoad];
     vcs = self;
     self.daConsole.delegate = self;
+    self.arrContacts = [@[] mutableCopy];
     // Do any additional setup after loading the view, typically from a nib.
 }
 
@@ -252,22 +268,15 @@ void end_while(void) {
 - (IBAction)tapListContacts:(id)sender {
     ((UIButton *)sender).backgroundColor = [UIColor purpleColor];
     wlog(@"tapListContacts");
-    contact_list_t *contacts;
-    list_contacts(&contacts);
-    if (!contacts) {
-        wlog(@"NO CONTACTS");
-        return;
-    }
-    self.arrContacts = [@[] mutableCopy];
-    contact_t *c = contacts->head;
-    while (c) {
-        ObjcContact *oc = [ObjcContact new];
-        oc.theContact = c;
-        [self.arrContacts addObject:oc];
-        c = c->next;
-    }
     for (ObjcContact *oc in self.arrContacts) {
         wlog([NSString stringWithFormat:@"Da Contact is %@", [oc username]]);
+    }
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"showSegueListContacts"]) {
+        ListContactsViewController *lcvc = segue.destinationViewController;
+        lcvc.contacts = self.arrContacts;
     }
 }
 
