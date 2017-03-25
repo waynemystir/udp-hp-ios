@@ -11,6 +11,14 @@
 #import "udp_client.h"
 #import "ObjcContact.h"
 #import "ListContactsViewController.h"
+#include "WESKeyChain.h"
+#include "crypto_wrapper.h"
+
+char *rsa_public_kee;
+char *rsa_private_kee;
+
+NSString * const kKeyRSAPublicKey = @"kKeyRSAPublicKey";
+NSString * const kKeyRSAPrivateKey = @"kKeyRSAPrivateKey";
 
 static ViewController *vcs;
 
@@ -34,6 +42,11 @@ void wlog(NSString *w) {
         [vcs.daConsole scrollRangeToVisible:bottom];
     });
     
+}
+
+void rsa_response(char *server_rsa_key) {
+    printf("%s\n", server_rsa_key);
+    wlog([NSString stringWithUTF8String:server_rsa_key]);
 }
 
 void self_info(char *w, unsigned short port, unsigned short chat_port, unsigned short family) {
@@ -194,7 +207,6 @@ void end_while(void) {
 
 @interface ViewController () <UITextViewDelegate>
 
-
 @end
 
 @implementation ViewController
@@ -213,7 +225,46 @@ void end_while(void) {
     vcs = self;
     self.daConsole.delegate = self;
     self.arrContacts = [@[] mutableCopy];
-    // Do any additional setup after loading the view, typically from a nib.
+    
+    [self amiExistingUserOnThisDevice];
+    [self letsAuthN];
+}
+
+- (void)letsAuthN {
+    authn(AUTH_STATUS_RSA_SWAP, rsa_public_kee, rsa_private_kee, rsa_response);
+}
+
+- (BOOL)amiExistingUserOnThisDevice {
+    NSString *rsaPubKey = [WESKeyChain objectForKey:kKeyRSAPublicKey];
+    NSString *rsaPriKey = [WESKeyChain objectForKey:kKeyRSAPrivateKey];
+    if (rsaPubKey && rsaPriKey) {
+        size_t pub_sz = sizeof([rsaPubKey UTF8String]);
+        size_t pri_sz = sizeof([rsaPriKey UTF8String]);
+        rsa_public_kee = malloc(pub_sz);
+        rsa_private_kee = malloc(pri_sz);
+        memset(rsa_public_kee, '\0', pub_sz);
+        memset(rsa_private_kee, '\0', pri_sz);
+        strcpy(rsa_public_kee, [rsaPubKey UTF8String]);
+        strcpy(rsa_private_kee, [rsaPriKey UTF8String]);
+        return YES;
+    } else {
+        char *rsa_pub_key = NULL;
+        char *rsa_pri_key = NULL;
+        generate_rsa_keypair(NULL, &rsa_pri_key, &rsa_pub_key, NULL, NULL);
+        if (!rsa_pub_key || !rsa_pri_key) {
+            // TODO handle this: probably show a message and terminate app
+            return NO;
+        }
+        size_t pub_sz = sizeof(*rsa_pub_key);
+        size_t pri_sz = sizeof(*rsa_pri_key);
+        rsa_public_kee = malloc(pub_sz);
+        rsa_private_kee = malloc(pri_sz);
+        memset(rsa_public_kee, '\0', pub_sz);
+        memset(rsa_private_kee, '\0', pri_sz);
+        strcpy(rsa_public_kee, rsa_pub_key);
+        strcpy(rsa_private_kee, rsa_pri_key);
+    }
+    return NO;
 }
 
 - (IBAction)tapPing:(id)sender {
