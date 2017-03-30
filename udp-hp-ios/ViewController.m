@@ -16,9 +16,11 @@
 
 char *rsa_public_kee;
 char *rsa_private_kee;
+unsigned char *aes_kee;
 
 NSString * const kKeyRSAPublicKey = @"kKeyRSAPublicKey";
 NSString * const kKeyRSAPrivateKey = @"kKeyRSAPrivateKey";
+NSString * const kKeyAESKey = @"kKeyAESKey";
 
 static ViewController *vcs;
 
@@ -45,8 +47,19 @@ void wlog(NSString *w) {
 }
 
 void rsa_response(char *server_rsa_key) {
-    printf("%s\n", server_rsa_key);
-    wlog([NSString stringWithUTF8String:server_rsa_key]);
+    char w[640];
+    sprintf(w, "server's public key (%s)\n", server_rsa_key);
+    printf("%s\n", w);
+    wlog([NSString stringWithUTF8String:w]);
+}
+
+void aes_key_created(unsigned char *aes_key) {
+    aes_kee = aes_key;
+    [WESKeyChain setObject:[NSData dataWithBytes:aes_kee length:NUM_BYTES_AES_KEY] forKey:kKeyAESKey];
+    char w[640];
+    sprintf(w, "AES key created (%s)(%lu)\n", aes_kee, sizeof(aes_key));
+    printf("%s\n", w);
+    wlog([NSString stringWithUTF8String:w]);
 }
 
 void self_info(char *w, unsigned short port, unsigned short chat_port, unsigned short family) {
@@ -56,7 +69,9 @@ void self_info(char *w, unsigned short port, unsigned short chat_port, unsigned 
     wlog([NSString stringWithUTF8String:e]);
 }
 
-void server_info(char *w) {
+void server_info(SERVER_TYPE st, char *w) {
+    char e[256];
+    sprintf(e, "server_info (%s) (%s)", str_from_server_type(st), w);
     printf("%s\n", w);
     wlog([NSString stringWithUTF8String:w]);
 }
@@ -81,9 +96,9 @@ void sendto_succeeded(size_t bytes_sent) {
     wlog([NSString stringWithUTF8String:w]);
 }
 
-void recd(size_t bytes_recd, socklen_t addr_len, char *w) {
+void recd(SERVER_TYPE st, size_t bytes_recd, socklen_t addr_len, char *w) {
     char e[256];
-    sprintf(e, "recvfrom %zu %u %s", bytes_recd, addr_len, w);
+    sprintf(e, "recvfrom %s %zu %u %s", str_from_server_type(st), bytes_recd, addr_len, w);
     printf("%s\n", e);
     wlog([NSString stringWithUTF8String:e]);
 }
@@ -94,8 +109,7 @@ void coll_buf(char *w) {
 }
 
 void new_client(SERVER_TYPE st, char *w) {
-    char st_str[15];
-    str_from_server_type(st, st_str);
+    char *st_str = str_from_server_type(st);
     char e[256];
     sprintf(e, "new_client %s %s", st_str, w);
     printf("%s\n", e);
@@ -125,8 +139,7 @@ void notify_existing_contact(char *w) {
 }
 
 void stay_touch_recd(SERVER_TYPE st) {
-    char st_str[15];
-    str_from_server_type(st, st_str);
+    char *st_str = str_from_server_type(st);
     char w[256];
     sprintf(w, "stay_touch_recd %s", st_str);
     printf("%s\n", w);
@@ -154,7 +167,7 @@ void hole_punch_sent(char *w, int t) {
 void confirmed_peer_while_punching(SERVER_TYPE st) {
     char w[256];
     switch (st) {
-        case SERVER_SIGNIN: {
+        case SERVER_MAIN: {
             strcpy(w, "*$*$*$*$*$*$*$*$*$*$*$*$*");
             break;
         }
@@ -170,8 +183,7 @@ void confirmed_peer_while_punching(SERVER_TYPE st) {
 }
 
 void from_peer(SERVER_TYPE st, char *w) {
-    char st_str[15];
-    str_from_server_type(st, st_str);
+    char *st_str = str_from_server_type(st);
     char e[256];
     sprintf(e, "from_peer %s %s", st_str, w);
     printf("%s\n", e);
@@ -231,15 +243,27 @@ void end_while(void) {
 }
 
 - (void)letsAuthN {
-    authn(AUTH_STATUS_RSA_SWAP, rsa_public_kee, rsa_private_kee, rsa_response);
+    authn(AUTHN_STATUS_RSA_SWAP,
+          rsa_public_kee,
+          rsa_private_kee,
+          aes_kee,
+          recd,
+          rsa_response,
+          aes_key_created);
 }
 
 - (BOOL)amiExistingUserOnThisDevice {
     NSString *rsaPubKey = [WESKeyChain objectForKey:kKeyRSAPublicKey];
     NSString *rsaPriKey = [WESKeyChain objectForKey:kKeyRSAPrivateKey];
+    NSData *aesKey = [WESKeyChain objectForKey:kKeyAESKey];
+    if (aesKey) {
+        aes_kee = malloc(NUM_BYTES_AES_KEY);
+        memset(aes_kee, '\0', NUM_BYTES_AES_KEY);
+        aes_kee = (unsigned char *)[aesKey bytes];
+    }
     if (rsaPubKey && rsaPriKey) {
-        size_t pub_sz = sizeof([rsaPubKey UTF8String]);
-        size_t pri_sz = sizeof([rsaPriKey UTF8String]);
+        size_t pub_sz = strlen([rsaPubKey UTF8String]);
+        size_t pri_sz = strlen([rsaPriKey UTF8String]);
         rsa_public_kee = malloc(pub_sz);
         rsa_private_kee = malloc(pri_sz);
         memset(rsa_public_kee, '\0', pub_sz);
@@ -255,14 +279,16 @@ void end_while(void) {
             // TODO handle this: probably show a message and terminate app
             return NO;
         }
-        size_t pub_sz = sizeof(*rsa_pub_key);
-        size_t pri_sz = sizeof(*rsa_pri_key);
+        size_t pub_sz = strlen(rsa_pub_key);
+        size_t pri_sz = strlen(rsa_pri_key);
         rsa_public_kee = malloc(pub_sz);
         rsa_private_kee = malloc(pri_sz);
         memset(rsa_public_kee, '\0', pub_sz);
         memset(rsa_private_kee, '\0', pri_sz);
         strcpy(rsa_public_kee, rsa_pub_key);
         strcpy(rsa_private_kee, rsa_pri_key);
+        [WESKeyChain setObject:[NSString stringWithUTF8String:rsa_private_kee] forKey:kKeyRSAPrivateKey];
+        [WESKeyChain setObject:[NSString stringWithUTF8String:rsa_public_kee] forKey:kKeyRSAPublicKey];
     }
     return NO;
 }
@@ -279,11 +305,9 @@ void end_while(void) {
     wlog(@"tapHolePunch");
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         wain(self_info,
-             server_info,
              socket_created,
              socket_bound,
              sendto_succeeded,
-             recd,
              coll_buf,
              new_client,
              confirmed_client,

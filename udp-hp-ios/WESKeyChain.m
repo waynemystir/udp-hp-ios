@@ -121,6 +121,8 @@
             //safe to encode as a string
             data = [object dataUsingEncoding:NSUTF8StringEncoding];
         }
+    } else if ([object isKindOfClass:[NSData class]]) {
+        data = object;
     }
     
     //fail if object is invalid
