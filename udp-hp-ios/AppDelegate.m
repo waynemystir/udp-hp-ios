@@ -7,6 +7,9 @@
 //
 
 #import "AppDelegate.h"
+#import "AuthN.h"
+#import "udp_client.h"
+#import "UdpClientCallbacks.h"
 
 @interface AppDelegate ()
 
@@ -16,10 +19,38 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    [self letsAuthN];
+    
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    UIViewController *rvc = nil;
+    if ([AuthN loggedInLastTimeUserName]) {
+        rvc = [storyboard instantiateViewControllerWithIdentifier:@"sbidMainVC"];
+    } else {
+        rvc = [storyboard instantiateViewControllerWithIdentifier:@"sbidLoginVC"];
+    }
+    NSArray *controllers = @[rvc];
+    
+    UINavigationController *nc = (UINavigationController *)self.window.rootViewController;
+    [nc setViewControllers:controllers];
+    
     return YES;
 }
 
+- (void)letsAuthN {
+    NODE_USER_STATUS nus = [AuthN loggedInLastTimeUserName] ? NODE_USER_STATUS_EXISTING_USER : NODE_USER_STATUS_UNKNOWN;
+    authn(nus,
+          [[AuthN loggedInLastTimeUserName] UTF8String],
+          [[AuthN getPasswordForUsername:[AuthN loggedInLastTimeUserName]] UTF8String],
+          AUTHN_STATUS_RSA_SWAP,
+          [AuthN getRSAPubKey],
+          [AuthN getRSAPriKey],
+          [AuthN getAESKey],
+          rsakeypair_generated,
+          recd,
+          rsa_response,
+          aes_key_created,
+          creds_check_result);
+}
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

@@ -19,6 +19,9 @@
 		B04A23ED1E86F4AF005BC3EF /* WESKeyChain.m in Sources */ = {isa = PBXBuildFile; fileRef = B04A23EC1E86F4AF005BC3EF /* WESKeyChain.m */; };
 		B04A23F01E86FFAB005BC3EF /* crypto_wrapper.c in Sources */ = {isa = PBXBuildFile; fileRef = B04A23EE1E86FFAB005BC3EF /* crypto_wrapper.c */; };
 		B04A23F31E8705FD005BC3EF /* openssl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B04A23F21E8705FD005BC3EF /* openssl.framework */; };
+		B07B37BC1E8EDE9100C28664 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B07B37BB1E8EDE9100C28664 /* LoginViewController.m */; };
+		B07B37BF1E8EE29400C28664 /* AuthN.m in Sources */ = {isa = PBXBuildFile; fileRef = B07B37BE1E8EE29400C28664 /* AuthN.m */; };
+		B07B37C51E8F03A000C28664 /* UdpClientCallbacks.m in Sources */ = {isa = PBXBuildFile; fileRef = B07B37C41E8F03A000C28664 /* UdpClientCallbacks.m */; };
 		B091E50B1E690CB90009F3CD /* node.c in Sources */ = {isa = PBXBuildFile; fileRef = B091E5091E690CB90009F3CD /* node.c */; };
 		B091E50E1E6E728C0009F3CD /* common.c in Sources */ = {isa = PBXBuildFile; fileRef = B091E50D1E6E728C0009F3CD /* common.c */; };
 		B0B64EA41E78E9F300C6C807 /* hashtable.c in Sources */ = {isa = PBXBuildFile; fileRef = B0B64EA21E78E9F300C6C807 /* hashtable.c */; };
@@ -50,6 +53,12 @@
 		B04A23EE1E86FFAB005BC3EF /* crypto_wrapper.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = crypto_wrapper.c; path = ../../crypto_wrapper/crypto_wrapper.c; sourceTree = "<group>"; };
 		B04A23EF1E86FFAB005BC3EF /* crypto_wrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = crypto_wrapper.h; path = ../../crypto_wrapper/crypto_wrapper.h; sourceTree = "<group>"; };
 		B04A23F21E8705FD005BC3EF /* openssl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = openssl.framework; path = "../../OpenSSL-for-iPhone/openssl.framework"; sourceTree = "<group>"; };
+		B07B37BA1E8EDE9100C28664 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		B07B37BB1E8EDE9100C28664 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		B07B37BD1E8EE29400C28664 /* AuthN.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthN.h; sourceTree = "<group>"; };
+		B07B37BE1E8EE29400C28664 /* AuthN.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthN.m; sourceTree = "<group>"; };
+		B07B37C31E8F03A000C28664 /* UdpClientCallbacks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UdpClientCallbacks.h; sourceTree = "<group>"; };
+		B07B37C41E8F03A000C28664 /* UdpClientCallbacks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UdpClientCallbacks.m; sourceTree = "<group>"; };
 		B091E5091E690CB90009F3CD /* node.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = node.c; path = "../../udp-hp/common/node.c"; sourceTree = "<group>"; };
 		B091E50A1E690CB90009F3CD /* node.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = node.h; path = "../../udp-hp/common/node.h"; sourceTree = "<group>"; };
 		B091E50C1E6BA5740009F3CD /* common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = common.h; path = "../../udp-hp/common/common.h"; sourceTree = "<group>"; };
@@ -99,10 +108,16 @@
 			children = (
 				B01C67561E62B66C0026DC81 /* AppDelegate.h */,
 				B01C67571E62B66C0026DC81 /* AppDelegate.m */,
+				B07B37BD1E8EE29400C28664 /* AuthN.h */,
+				B07B37BE1E8EE29400C28664 /* AuthN.m */,
 				B01C67591E62B66C0026DC81 /* ViewController.h */,
 				B01C675A1E62B66C0026DC81 /* ViewController.m */,
+				B07B37C31E8F03A000C28664 /* UdpClientCallbacks.h */,
+				B07B37C41E8F03A000C28664 /* UdpClientCallbacks.m */,
 				B0B64EA81E7C2B5500C6C807 /* ListContactsViewController.h */,
 				B0B64EA91E7C2B5500C6C807 /* ListContactsViewController.m */,
+				B07B37BA1E8EDE9100C28664 /* LoginViewController.h */,
+				B07B37BB1E8EDE9100C28664 /* LoginViewController.m */,
 				B0B64EAB1E7C384C00C6C807 /* ContactViewController.h */,
 				B0B64EAC1E7C384C00C6C807 /* ContactViewController.m */,
 				B0B64EAD1E7C384C00C6C807 /* ContactViewController.xib */,
@@ -223,7 +238,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				B0B64EA71E7B750000C6C807 /* ObjcContact.m in Sources */,
+				B07B37C51E8F03A000C28664 /* UdpClientCallbacks.m in Sources */,
 				B0B64EAE1E7C384C00C6C807 /* ContactViewController.m in Sources */,
+				B07B37BF1E8EE29400C28664 /* AuthN.m in Sources */,
 				B01C675B1E62B66C0026DC81 /* ViewController.m in Sources */,
 				B01C676C1E62BD9E0026DC81 /* udp_dev.c in Sources */,
 				B091E50E1E6E728C0009F3CD /* common.c in Sources */,
@@ -236,6 +253,7 @@
 				B01C67551E62B66C0026DC81 /* main.m in Sources */,
 				B01C67771E632F3D0026DC81 /* network_utils.c in Sources */,
 				B091E50B1E690CB90009F3CD /* node.c in Sources */,
+				B07B37BC1E8EDE9100C28664 /* LoginViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
