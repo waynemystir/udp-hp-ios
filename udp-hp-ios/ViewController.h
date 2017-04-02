@@ -11,7 +11,6 @@
 @interface ViewController : UIViewController
 
 @property (weak, atomic) IBOutlet UITextView *daConsole;
-@property (nonatomic, strong) NSMutableArray *arrContacts;
 
 @end
 

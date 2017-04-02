@@ -9,9 +9,13 @@
 #import <UIKit/UIKit.h>
 #import "udp_client.h"
 
-void register_for_wlog(UITextView *tv);
+extern NSMutableArray *arrContacts;
 
-void wlog(NSString *w);
+typedef void(*wlogCallback)(NSString *newStr, NSString *allLogs);
+
+NSString *addWlogCallback(wlogCallback);
+
+void wlog2(char *log);
 
 void rsakeypair_generated(const char *rsa_pub_key, const char *rsa_pri_key);
 

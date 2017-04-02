@@ -10,6 +10,7 @@
 #import "ObjcContact.h"
 #import "AppDelegate.h"
 #import "ContactViewController.h"
+#import "UdpClientCallbacks.h"
 
 @interface ListContactsViewController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -18,6 +19,13 @@
 @end
 
 @implementation ListContactsViewController
+
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    if (self = [super initWithCoder:aDecoder]) {
+        _contacts = arrContacts;
+    }
+    return self;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
