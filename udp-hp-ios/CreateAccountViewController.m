@@ -1,24 +1,22 @@
 //
-//  LoginViewController.m
+//  CreateAccountViewController.m
 //  udp-hp-ios
 //
-//  Created by WAYNE SMALL on 3/31/17.
+//  Created by WAYNE SMALL on 4/2/17.
 //  Copyright © 2017 Waynemystir. All rights reserved.
 //
 
-#import "LoginViewController.h"
-#import "ViewController.h"
+#import "CreateAccountViewController.h"
 #import "udp_client.h"
 #import "Shared.h"
 
-@interface LoginViewController () <UITextFieldDelegate>
+@interface CreateAccountViewController () <UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *usernameTextfield;
 @property (weak, nonatomic) IBOutlet UITextField *passwordTextfield;
-
 @end
 
-@implementation LoginViewController
+@implementation CreateAccountViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -55,25 +53,9 @@
                 break;
             }
             case AUTHN_CREDS_CHECK_RESULT_USER_NOT_FOUND: {
-                UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"A problem occurred" message:@"We didn't recognize your username" preferredStyle:UIAlertControllerStyleAlert];
-                UIAlertAction *aa = [UIAlertAction actionWithTitle:@"Try again" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-                    ;
-                }];
-                [ac addAction:aa];
-                [self presentViewController:ac animated:YES completion:^{
-                    ;
-                }];
                 break;
             }
             case AUTHN_CREDS_CHECK_RESULT_WRONG_PASSWORD: {
-                UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"A problem occurred" message:@"You entered the wrong password" preferredStyle:UIAlertControllerStyleAlert];
-                UIAlertAction *aa = [UIAlertAction actionWithTitle:@"Try again" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-                    ;
-                }];
-                [ac addAction:aa];
-                [self presentViewController:ac animated:YES completion:^{
-                    ;
-                }];
                 break;
             }
             case AUTHN_CREDS_CHECK_RESULT_MISC_ERROR: {
@@ -96,9 +78,13 @@
         [self.passwordTextfield becomeFirstResponder];
     } else if (textField == self.passwordTextfield) {
         if ([self.usernameTextfield.text length] && [self.passwordTextfield.text length]) {
-            send_user(NODE_USER_STATUS_EXISTING_USER,
+            send_user(NODE_USER_STATUS_NEW_USER,
                       (char*)[self.usernameTextfield.text UTF8String],
                       (char*)[self.passwordTextfield.text UTF8String]);
+            UINavigationController *nc = self.navigationController;
+            [nc popViewControllerAnimated:YES];
+            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+            [nc pushViewController:[storyboard instantiateViewControllerWithIdentifier:@"sbidMainVC"] animated:YES];
         }
     }
     return YES;

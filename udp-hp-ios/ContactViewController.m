@@ -25,6 +25,11 @@
     self.messageTextField.delegate = self;
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBarHidden = NO;
+}
+
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     NSString *msgText = textField.text;
     send_message_to_contact(self.contact.theContact, [msgText UTF8String]);

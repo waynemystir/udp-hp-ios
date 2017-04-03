@@ -22,6 +22,8 @@
 		B07B37BC1E8EDE9100C28664 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B07B37BB1E8EDE9100C28664 /* LoginViewController.m */; };
 		B07B37BF1E8EE29400C28664 /* AuthN.m in Sources */ = {isa = PBXBuildFile; fileRef = B07B37BE1E8EE29400C28664 /* AuthN.m */; };
 		B07B37C51E8F03A000C28664 /* UdpClientCallbacks.m in Sources */ = {isa = PBXBuildFile; fileRef = B07B37C41E8F03A000C28664 /* UdpClientCallbacks.m */; };
+		B07B37C81E90E1AE00C28664 /* CreateAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B07B37C71E90E1AE00C28664 /* CreateAccountViewController.m */; };
+		B07B37CE1E91BD0500C28664 /* Shared.m in Sources */ = {isa = PBXBuildFile; fileRef = B07B37CD1E91BD0500C28664 /* Shared.m */; };
 		B091E50B1E690CB90009F3CD /* node.c in Sources */ = {isa = PBXBuildFile; fileRef = B091E5091E690CB90009F3CD /* node.c */; };
 		B091E50E1E6E728C0009F3CD /* common.c in Sources */ = {isa = PBXBuildFile; fileRef = B091E50D1E6E728C0009F3CD /* common.c */; };
 		B0B64EA41E78E9F300C6C807 /* hashtable.c in Sources */ = {isa = PBXBuildFile; fileRef = B0B64EA21E78E9F300C6C807 /* hashtable.c */; };
@@ -59,6 +61,10 @@
 		B07B37BE1E8EE29400C28664 /* AuthN.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthN.m; sourceTree = "<group>"; };
 		B07B37C31E8F03A000C28664 /* UdpClientCallbacks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UdpClientCallbacks.h; sourceTree = "<group>"; };
 		B07B37C41E8F03A000C28664 /* UdpClientCallbacks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UdpClientCallbacks.m; sourceTree = "<group>"; };
+		B07B37C61E90E1AE00C28664 /* CreateAccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateAccountViewController.h; sourceTree = "<group>"; };
+		B07B37C71E90E1AE00C28664 /* CreateAccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateAccountViewController.m; sourceTree = "<group>"; };
+		B07B37CC1E91BD0500C28664 /* Shared.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Shared.h; sourceTree = "<group>"; };
+		B07B37CD1E91BD0500C28664 /* Shared.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Shared.m; sourceTree = "<group>"; };
 		B091E5091E690CB90009F3CD /* node.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = node.c; path = "../../udp-hp/common/node.c"; sourceTree = "<group>"; };
 		B091E50A1E690CB90009F3CD /* node.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = node.h; path = "../../udp-hp/common/node.h"; sourceTree = "<group>"; };
 		B091E50C1E6BA5740009F3CD /* common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = common.h; path = "../../udp-hp/common/common.h"; sourceTree = "<group>"; };
@@ -118,12 +124,16 @@
 				B0B64EA91E7C2B5500C6C807 /* ListContactsViewController.m */,
 				B07B37BA1E8EDE9100C28664 /* LoginViewController.h */,
 				B07B37BB1E8EDE9100C28664 /* LoginViewController.m */,
+				B07B37C61E90E1AE00C28664 /* CreateAccountViewController.h */,
+				B07B37C71E90E1AE00C28664 /* CreateAccountViewController.m */,
 				B0B64EAB1E7C384C00C6C807 /* ContactViewController.h */,
 				B0B64EAC1E7C384C00C6C807 /* ContactViewController.m */,
 				B0B64EAD1E7C384C00C6C807 /* ContactViewController.xib */,
 				B04A23EB1E86F4AF005BC3EF /* WESKeyChain.h */,
 				B04A23EC1E86F4AF005BC3EF /* WESKeyChain.m */,
 				B01C675C1E62B66C0026DC81 /* Main.storyboard */,
+				B07B37CC1E91BD0500C28664 /* Shared.h */,
+				B07B37CD1E91BD0500C28664 /* Shared.m */,
 				B01C675F1E62B66C0026DC81 /* Assets.xcassets */,
 				B01C67611E62B66C0026DC81 /* LaunchScreen.storyboard */,
 				B01C67641E62B66C0026DC81 /* Info.plist */,
@@ -245,9 +255,11 @@
 				B01C676C1E62BD9E0026DC81 /* udp_dev.c in Sources */,
 				B091E50E1E6E728C0009F3CD /* common.c in Sources */,
 				B0B64EAA1E7C2B5500C6C807 /* ListContactsViewController.m in Sources */,
+				B07B37C81E90E1AE00C28664 /* CreateAccountViewController.m in Sources */,
 				B01C67781E632F3D0026DC81 /* udp_client.c in Sources */,
 				B01C67581E62B66C0026DC81 /* AppDelegate.m in Sources */,
 				B04A23F01E86FFAB005BC3EF /* crypto_wrapper.c in Sources */,
+				B07B37CE1E91BD0500C28664 /* Shared.m in Sources */,
 				B0B64EA41E78E9F300C6C807 /* hashtable.c in Sources */,
 				B04A23ED1E86F4AF005BC3EF /* WESKeyChain.m in Sources */,
 				B01C67551E62B66C0026DC81 /* main.m in Sources */,

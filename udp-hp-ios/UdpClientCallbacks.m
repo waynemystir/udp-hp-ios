@@ -10,6 +10,7 @@
 #import "AuthN.h"
 #import "ViewController.h"
 #import "ObjcContact.h"
+#import "Shared.h"
 
 @interface WlogDelegate : NSObject
 @property (nonatomic) wlogCallback callback;
@@ -59,30 +60,29 @@ void aes_key_created(unsigned char *aes_key) {
 
 void creds_check_result(AUTHN_CREDS_CHECK_RESULT cr, char *username,
                         char *password, unsigned char *authn_token) {
+    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationCredentialsCheckResult object:[NSNumber numberWithInt:cr]];
     switch (cr) {
         case AUTHN_CREDS_CHECK_RESULT_GOOD: {
             [AuthN addUsername:[NSString stringWithUTF8String:username]
                    andPassword:[NSString stringWithUTF8String:password]];
             [AuthN setLoggedInLastTimeUserName:[NSString stringWithUTF8String:username]];
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                wain(self_info,
-                     socket_created,
-                     socket_bound,
-                     sendto_succeeded,
-                     coll_buf,
-                     new_client,
-                     confirmed_client,
-                     notify_existing_contact,
-                     stay_touch_recd,
-                     new_peer,
-                     hole_punch_sent,
-                     confirmed_peer_while_punching,
-                     from_peer,
-                     chat_msg,
-                     unhandled_response_from_server,
-                     whilew,
-                     end_while);
-            });
+            wain(self_info,
+                 socket_created,
+                 socket_bound,
+                 sendto_succeeded,
+                 coll_buf,
+                 new_client,
+                 confirmed_client,
+                 notify_existing_contact,
+                 stay_touch_recd,
+                 new_peer,
+                 hole_punch_sent,
+                 confirmed_peer_while_punching,
+                 from_peer,
+                 chat_msg,
+                 unhandled_response_from_server,
+                 whilew,
+                 end_while);
             break;
         }
         case AUTHN_CREDS_CHECK_RESULT_USER_NOT_FOUND: {
@@ -165,6 +165,8 @@ void notify_existing_contact(char *w) {
         return;
     }
     contact_t *c = contacts->head;
+    // TODO redo this - we shouldn't have to reset
+    // arrContacts everytime
     arrContacts = [@[] mutableCopy];
     while (c) {
         ObjcContact *oc = [ObjcContact new];

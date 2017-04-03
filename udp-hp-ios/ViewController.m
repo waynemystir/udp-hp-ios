@@ -47,6 +47,11 @@ void logsCallback(NSString *newLog, NSString *allLogs) {
     [self.daConsole scrollRangeToVisible:bottom];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBarHidden = YES;
+}
+
 - (IBAction)tapPing:(id)sender {
     printf("tapPing\n");
     ((UIButton *)sender).backgroundColor = [UIColor purpleColor];
@@ -89,7 +94,12 @@ void logsCallback(NSString *newLog, NSString *allLogs) {
     [AuthN Signout];
     signout();
     UINavigationController *nc = self.navigationController;
-    [nc popViewControllerAnimated:YES];
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    UIViewController *rvc = [storyboard instantiateViewControllerWithIdentifier:@"sbidLoginVC"];
+    NSMutableArray *allViewControllers = [nc.viewControllers mutableCopy];
+    [allViewControllers insertObject:rvc atIndex:0];
+    [nc setViewControllers:allViewControllers];
+    [nc popToViewController:rvc animated:YES];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {

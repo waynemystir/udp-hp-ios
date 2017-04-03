@@ -31,7 +31,11 @@
     [super viewDidLoad];
     self.theTableView.delegate = self;
     self.theTableView.dataSource = self;
-    // Do any additional setup after loading the view.
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBarHidden = NO;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
