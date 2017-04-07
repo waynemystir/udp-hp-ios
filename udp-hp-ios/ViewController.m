@@ -59,11 +59,6 @@ void logsCallback(NSString *newLog, NSString *allLogs) {
     wlog2(w);
 }
 
-- (IBAction)tapHolePunch:(id)sender {
-    ((UIButton *)sender).backgroundColor = [UIColor purpleColor];
-    wlog2("tapHolePunch");
-}
-
 - (IBAction)tapPingAllPeers:(id)sender {
     ((UIButton *)sender).backgroundColor = [UIColor purpleColor];
     wlog2("tapPingAllPeers");

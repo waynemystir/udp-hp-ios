@@ -32,7 +32,7 @@ NSString *addWlogCallback(wlogCallback callback) {
 }
 
 void wlog2(char *log) {
-    char w[512];
+    char w[512] = {0};
     sprintf(w, "%s\n", log);
     printf("%s", w);
     NSString *newLog = [NSString stringWithUTF8String:w];
@@ -67,6 +67,7 @@ void creds_check_result(AUTHN_CREDS_CHECK_RESULT cr, char *username,
                    andPassword:[NSString stringWithUTF8String:password]];
             [AuthN setLoggedInLastTimeUserName:[NSString stringWithUTF8String:username]];
             wain(self_info,
+                 server_info,
                  socket_created,
                  socket_bound,
                  sendto_succeeded,
@@ -137,7 +138,7 @@ void sendto_succeeded(size_t bytes_sent) {
 }
 
 void recd(SERVER_TYPE st, size_t bytes_recd, socklen_t addr_len, char *w) {
-    char e[256];
+    char e[256] = {0};
     sprintf(e, "recvfrom %s %zu %u %s", str_from_server_type(st), bytes_recd, addr_len, w);
     wlog2(e);
 }

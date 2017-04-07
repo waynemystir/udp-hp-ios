@@ -32,7 +32,7 @@
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     NSString *msgText = textField.text;
-    send_message_to_contact(self.contact.theContact, [msgText UTF8String]);
+    send_message_to_contact(self.contact.theContact, (char*)[msgText UTF8String]);
     return YES;
 }
 

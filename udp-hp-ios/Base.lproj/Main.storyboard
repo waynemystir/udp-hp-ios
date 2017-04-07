@@ -202,9 +202,9 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                        <state key="normal" title="HP"/>
+                                        <state key="normal" title="SU"/>
                                         <connections>
-                                            <action selector="tapHolePunch:" destination="BYZ-38-t0r" eventType="touchUpInside" id="9bB-zx-bX1"/>
+                                            <segue destination="1Nm-y3-ZAj" kind="show" id="u6b-hT-poT"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wse-8M-uNw">
@@ -280,6 +280,49 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="32.799999999999997" y="38.23088455772114"/>
+        </scene>
+        <!--Search Users View Controller-->
+        <scene sceneID="YpO-6P-RdC">
+            <objects>
+                <viewController id="1Nm-y3-ZAj" customClass="SearchUsersViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="62j-Qb-dtp"/>
+                        <viewControllerLayoutGuide type="bottom" id="bcO-5B-ubc"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="tMl-C5-G0L">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Type the username you are looking for" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bNd-OQ-Yre">
+                                <rect key="frame" x="16" y="68" width="343" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="sNc-lU-sGR">
+                                <rect key="frame" x="16" y="117" width="343" height="530"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="bNd-OQ-Yre" firstAttribute="leading" secondItem="tMl-C5-G0L" secondAttribute="leadingMargin" id="592-M8-ScP"/>
+                            <constraint firstAttribute="bottom" secondItem="sNc-lU-sGR" secondAttribute="bottom" constant="20" symbolic="YES" id="HRQ-2H-W8E"/>
+                            <constraint firstItem="sNc-lU-sGR" firstAttribute="trailing" secondItem="bNd-OQ-Yre" secondAttribute="trailing" id="PFo-eh-uym"/>
+                            <constraint firstItem="bNd-OQ-Yre" firstAttribute="trailing" secondItem="tMl-C5-G0L" secondAttribute="trailingMargin" id="qhH-cX-dOo"/>
+                            <constraint firstItem="bNd-OQ-Yre" firstAttribute="top" secondItem="62j-Qb-dtp" secondAttribute="bottom" constant="48" id="uEg-he-Het"/>
+                            <constraint firstItem="sNc-lU-sGR" firstAttribute="leading" secondItem="bNd-OQ-Yre" secondAttribute="leading" id="xQV-7B-pnM"/>
+                            <constraint firstItem="sNc-lU-sGR" firstAttribute="top" secondItem="bNd-OQ-Yre" secondAttribute="bottom" constant="19" id="zQf-ju-2sR"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="searchResultsTableview" destination="sNc-lU-sGR" id="z4R-Be-Kfd"/>
+                        <outlet property="searchTextfield" destination="bNd-OQ-Yre" id="X3c-YJ-ZdH"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="u4G-nu-7Ye" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="376.80000000000001" y="722.78860569715152"/>
         </scene>
         <!--List Contacts View Controller-->
         <scene sceneID="Ydr-UC-zmh">
