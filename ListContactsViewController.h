@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ObjcContact.h"
 
 @interface ListContactsViewController : UIViewController
 
-@property (nonatomic, strong) NSArray *contacts;
+@property (nonatomic, strong) NSArray<ObjcContact*> *contacts;
 
 @end

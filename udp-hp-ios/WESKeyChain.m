@@ -196,49 +196,15 @@
 - (id)objectForKey:(id)key
 {
     NSData *data = [self dataForKey:key];
-    if (data)
-    {
+    if (data) {
         id object = nil;
-        NSError *error = nil;
-        NSPropertyListFormat format = NSPropertyListBinaryFormat_v1_0;
-        
-        //check if data is a binary plist
-        if ([data length] >= 6 && !strncmp("bplist", data.bytes, 6))
-        {
-            //attempt to decode as a plist
-            object = [NSPropertyListSerialization propertyListWithData:data
-                                                               options:NSPropertyListImmutable
-                                                                format:&format
-                                                                 error:&error];
-            
-            if ([object respondsToSelector:@selector(objectForKey:)] && [(NSDictionary *)object objectForKey:@"$archiver"])
-            {
-                //data represents an NSCoded archive
-                
-#if FXKEYCHAIN_USE_NSCODING
-                
-                //parse as archive
-                object = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-#else
-                //don't trust it
-                object = nil;
-#endif
-                
-            }
-        }
-        if (!object || format != NSPropertyListBinaryFormat_v1_0)
-        {
-            //may be a string
+        if ([key isEqualToString:@"kKeyAESKey"]) {
+            object = data;
+        } else {
             object = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
         }
-        if (!object)
-        {
-            NSLog(@"FXKeychain failed to decode data for key '%@', error: %@", key, error);
-        }
         return object;
-    }
-    else
-    {
+    } else {
         //no value found
         return nil;
     }

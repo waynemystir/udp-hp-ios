@@ -13,6 +13,8 @@
 #import "ListContactsViewController.h"
 #import "AuthN.h"
 #include "UdpClientCallbacks.h"
+#import "Shared.h"
+#import "AppDelegate.h"
 
 void logsCallback(NSString *newLog, NSString *allLogs) {
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -24,9 +26,18 @@ void logsCallback(NSString *newLog, NSString *allLogs) {
 
 @interface ViewController () <UITextViewDelegate>
 
+@property (weak, nonatomic) IBOutlet UIButton *contactRequestsButton;
+
 @end
 
 @implementation ViewController
+
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    if (self = [super initWithCoder:aDecoder]) {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleNewContactRequests:) name:kNotificationAddContactRequest object:nil];
+    }
+    return self;
+}
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
     if( [text rangeOfCharacterFromSet:[NSCharacterSet newlineCharacterSet]].location == NSNotFound ) {
@@ -35,6 +46,20 @@ void logsCallback(NSString *newLog, NSString *allLogs) {
     
     [textView resignFirstResponder];
     return NO;
+}
+
+- (void)handleNewContactRequests:(NSNotification*)notification {
+    AppDelegate *ad = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+    NSString *w = [notification.userInfo objectForKey:@"username"];
+    if (ad.contactRequests.count || ![w isEqualToString:@""]) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.contactRequestsButton.hidden = NO;
+        });
+    } else {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.contactRequestsButton.hidden = YES;
+        });
+    }
 }
 
 - (void)viewDidLoad {
@@ -50,6 +75,12 @@ void logsCallback(NSString *newLog, NSString *allLogs) {
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     self.navigationController.navigationBarHidden = YES;
+    AppDelegate *ad = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+    if (ad.contactRequests.count) {
+        self.contactRequestsButton.hidden = NO;
+    } else {
+        self.contactRequestsButton.hidden = YES;
+    }
 }
 
 - (IBAction)tapPing:(id)sender {
@@ -57,14 +88,6 @@ void logsCallback(NSString *newLog, NSString *allLogs) {
     ((UIButton *)sender).backgroundColor = [UIColor purpleColor];
     char *w = send_ping();
     wlog2(w);
-}
-
-- (IBAction)tapPingAllPeers:(id)sender {
-    ((UIButton *)sender).backgroundColor = [UIColor purpleColor];
-    wlog2("tapPingAllPeers");
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        ping_all_peers();
-    });
 }
 
 - (IBAction)tapSendMessageAllPeers:(id)sender {
@@ -98,9 +121,6 @@ void logsCallback(NSString *newLog, NSString *allLogs) {
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqualToString:@"showSegueListContacts"]) {
-        ListContactsViewController *lcvc = segue.destinationViewController;
-    }
 }
 
 - (void)didReceiveMemoryWarning {

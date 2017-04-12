@@ -9,6 +9,9 @@
 #import <Foundation/Foundation.h>
 
 extern NSString * const kNotificationCredentialsCheckResult;
+extern NSString * const kNotificationAddContactRequest;
+extern NSString * const kNotificationContactRequestAccepted;
+extern NSString * const kNotificationContactRequestDeclined;
 
 @interface Shared : NSObject
 

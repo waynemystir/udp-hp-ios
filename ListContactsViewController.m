@@ -7,7 +7,6 @@
 //
 
 #import "ListContactsViewController.h"
-#import "ObjcContact.h"
 #import "AppDelegate.h"
 #import "ContactViewController.h"
 #import "UdpClientCallbacks.h"

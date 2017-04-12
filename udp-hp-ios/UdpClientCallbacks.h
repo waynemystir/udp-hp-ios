@@ -48,6 +48,12 @@ void stay_touch_recd(SERVER_TYPE st);
 
 void confirmed_client();
 
+void add_contact_request(char *username);
+
+void contact_request_accepted(char *username);
+
+void contact_request_declined(char *username);
+
 void new_peer(char *w);
 
 void hole_punch_sent(char *w, int t);

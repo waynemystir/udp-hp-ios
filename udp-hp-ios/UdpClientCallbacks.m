@@ -11,6 +11,7 @@
 #import "ViewController.h"
 #import "ObjcContact.h"
 #import "Shared.h"
+#import <AudioToolbox/AudioToolbox.h>
 
 @interface WlogDelegate : NSObject
 @property (nonatomic) wlogCallback callback;
@@ -21,7 +22,7 @@
 
 NSMutableArray<WlogDelegate *> *delegates;
 NSString *wLogs = @"";
-NSMutableArray *arrContacts;
+NSMutableArray<ObjcContact*> *arrContacts;
 
 NSString *addWlogCallback(wlogCallback callback) {
     if (!delegates) delegates = [@[] mutableCopy];
@@ -76,6 +77,9 @@ void creds_check_result(AUTHN_CREDS_CHECK_RESULT cr, char *username,
                  confirmed_client,
                  notify_existing_contact,
                  stay_touch_recd,
+                 add_contact_request,
+                 contact_request_accepted,
+                 contact_request_declined,
                  new_peer,
                  hole_punch_sent,
                  confirmed_peer_while_punching,
@@ -186,6 +190,32 @@ void stay_touch_recd(SERVER_TYPE st) {
 
 void confirmed_client() {
     char *w = "Confirmed client";
+    wlog2(w);
+}
+
+void add_contact_request(char *username) {
+    AudioServicesPlaySystemSound(1012);
+    NSDictionary *d = @{@"username":[NSString stringWithUTF8String:username]};
+    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationAddContactRequest object:nil userInfo:d];
+    char w[256];
+    sprintf(w, "add_contact_request from %s", username);
+    wlog2(w);
+}
+
+void contact_request_accepted(char *username) {
+    AudioServicesPlaySystemSound(1022);
+    NSDictionary *d = @{@"username":[NSString stringWithUTF8String:username]};
+    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationContactRequestAccepted object:nil userInfo:d];
+    char w[256];
+    sprintf(w, "contact_request_accepted from %s", username);
+    wlog2(w);
+}
+
+void contact_request_declined(char *username) {
+    NSDictionary *d = @{@"username":[NSString stringWithUTF8String:username]};
+    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationContactRequestDeclined object:nil userInfo:d];
+    char w[256];
+    sprintf(w, "contact_request_declined from %s", username);
     wlog2(w);
 }
 

@@ -10,6 +10,7 @@
 #import "AuthN.h"
 #import "udp_client.h"
 #import "UdpClientCallbacks.h"
+#import "Shared.h"
 
 @interface AppDelegate ()
 
@@ -32,8 +33,34 @@
     
     UINavigationController *nc = (UINavigationController *)self.window.rootViewController;
     [nc setViewControllers:controllers];
+
+    self.contactRequests = [@[] mutableCopy];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleNewContactRequest:) name:kNotificationAddContactRequest object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleContactRequestAccepted:) name:kNotificationContactRequestAccepted object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleContactRequestDeclined:) name:kNotificationContactRequestDeclined object:nil];
     
     return YES;
+}
+
+- (void)handleNewContactRequest:(NSNotification*)notification {
+    NSString *w = [notification.userInfo objectForKey:@"username"];
+    if (w && [w isKindOfClass:[NSString class]] && ![w isEqualToString:@""]) {
+        [self.contactRequests addObject:[w lowercaseString]];
+    }
+}
+
+- (void)handleContactRequestAccepted:(NSNotification*)notification {
+    NSString *w = [notification.userInfo objectForKey:@"username"];
+    if (w && [w isKindOfClass:[NSString class]] && ![w isEqualToString:@""]) {
+        [self.contactRequests removeObject:[w lowercaseString]];
+    }
+}
+
+- (void)handleContactRequestDeclined:(NSNotification*)notification {
+    NSString *w = [notification.userInfo objectForKey:@"username"];
+    if (w && [w isKindOfClass:[NSString class]] && ![w isEqualToString:@""]) {
+        [self.contactRequests removeObject:[w lowercaseString]];
+    }
 }
 
 - (void)letsAuthN {
@@ -76,6 +103,7 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    quit();
 }
 
 

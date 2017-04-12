@@ -69,7 +69,7 @@ NSString * const kKeyUsernames = @"kKeyUsernames";
 }
 
 + (size_t)getSizeOfAESKey {
-    return sizeof([self getAESKey]);
+    return sizeof(*[self getAESKey]);
 }
 
 + (void)setAESKey:(NSData *)key {
