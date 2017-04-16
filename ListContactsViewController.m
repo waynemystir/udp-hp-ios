@@ -14,6 +14,7 @@
 @interface ListContactsViewController () <UITableViewDelegate, UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UITableView *theTableView;
+@property (nonatomic, strong) ObjcContact *selectedContact;
 
 @end
 
@@ -49,12 +50,13 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    ObjcContact *oc = self.contacts[indexPath.row];
-    AppDelegate *ad = (AppDelegate*)[[UIApplication sharedApplication] delegate];
-    UINavigationController *nc = (UINavigationController *) ad.window.rootViewController;
-    ContactViewController *cvc = [ContactViewController new];
-    cvc.contact = oc;
-    [nc pushViewController:cvc animated:YES];
+    self.selectedContact = self.contacts[indexPath.row];
+    [self performSegueWithIdentifier:@"sbidSegueToContactVC" sender:self];
+//    AppDelegate *ad = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+//    UINavigationController *nc = (UINavigationController *) ad.window.rootViewController;
+//    ContactViewController *cvc = [ContactViewController new];
+//    cvc.contact = oc;
+//    [nc pushViewController:cvc animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -62,14 +64,14 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    if ([segue.identifier isEqualToString:@"sbidSegueToContactVC"]) {
+        ContactViewController *cvc = segue.destinationViewController;
+        cvc.contact = self.selectedContact;
+    }
 }
-*/
 
 @end

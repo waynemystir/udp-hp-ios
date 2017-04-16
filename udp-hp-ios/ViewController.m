@@ -16,7 +16,7 @@
 #import "Shared.h"
 #import "AppDelegate.h"
 
-void logsCallback(NSString *newLog, NSString *allLogs) {
+void logsCallback(NSString *newLog, NSString *allLogs, LOG_LEVEL log_level) {
     dispatch_async(dispatch_get_main_queue(), ^{
         [vcs.daConsole setText:allLogs];
         NSRange bottom = NSMakeRange(vcs.daConsole.text.length - 1, 1);
@@ -87,24 +87,24 @@ void logsCallback(NSString *newLog, NSString *allLogs) {
     printf("tapPing\n");
     ((UIButton *)sender).backgroundColor = [UIColor purpleColor];
     char *w = send_ping();
-    wlog2(w);
+    wlog2(w, INFO_LOG);
 }
 
 - (IBAction)tapSendMessageAllPeers:(id)sender {
     ((UIButton *)sender).backgroundColor = [UIColor purpleColor];
-    wlog2("tapPingAllPeers");
+    wlog2("tapPingAllPeers", INFO_LOG);
     char w[32];
     strcpy(w, "hi-de-ho neighbor");
-    send_message_to_all_peers(w);
+    send_message_to_all_contacts(w);
 }
 
 - (IBAction)tapListContacts:(id)sender {
     ((UIButton *)sender).backgroundColor = [UIColor purpleColor];
-    wlog2("tapListContacts");
+    wlog2("tapListContacts", INFO_LOG);
     for (ObjcContact *oc in arrContacts) {
         char w[256];
         sprintf(w, "Da Contact is %s", [[oc username] UTF8String]);
-        wlog2(w);
+        wlog2(w, INFO_LOG);
     }
 }
 

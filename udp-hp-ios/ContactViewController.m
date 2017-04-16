@@ -36,6 +36,10 @@
     return YES;
 }
 
+- (IBAction)startVideoCall:(id)sender {
+    char *video_call_url = start_video_with_contact(self.contact.theContact);
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

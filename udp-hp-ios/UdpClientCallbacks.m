@@ -32,14 +32,20 @@ NSString *addWlogCallback(wlogCallback callback) {
     return wLogs;
 }
 
-void wlog2(char *log) {
+void wlog2(char *log, LOG_LEVEL log_level) {
     char w[512] = {0};
     sprintf(w, "%s\n", log);
     printf("%s", w);
     NSString *newLog = [NSString stringWithUTF8String:w];
     wLogs = [wLogs stringByAppendingString:newLog];
     for (WlogDelegate *d in delegates)
-        if (d.callback) d.callback(newLog, wLogs);
+        if (d.callback) d.callback(newLog, wLogs, log_level);
+}
+
+void pfail_bc(char *err_msg) {
+    char w[256];
+    sprintf(w, "PFFFFFFFFFFFFAILLLLLLLLL (%s)", err_msg);
+    wlog2(w, SEVERE_LOG);
 }
 
 void rsakeypair_generated(const char *rsa_pub_key, const char *rsa_pri_key) {
@@ -48,15 +54,26 @@ void rsakeypair_generated(const char *rsa_pub_key, const char *rsa_pri_key) {
 
 void rsa_response(char *server_rsa_key) {
     char w[640];
-    sprintf(w, "server's public key (%s)", server_rsa_key);
-    wlog2(w);
+    sprintf(w, "server's public key strlen (%lu)", strlen(server_rsa_key));
+    wlog2(w, INFO_LOG);
 }
 
 void aes_key_created(unsigned char *aes_key) {
     [AuthN setAESKey:[NSData dataWithBytes:aes_key length:NUM_BYTES_AES_KEY]];
     char w[640];
     sprintf(w, "AES key created (%s)(%lu)", [AuthN getAESKey], [AuthN getSizeOfAESKey]);
-    wlog2(w);
+    wlog2(w, INFO_LOG);
+}
+
+void aes_response(NODE_USER_STATUS nus) {
+    char w[256];
+    sprintf(w, "aes_response (%s)", node_user_status_to_str(nus));
+    wlog2(w, INFO_LOG);
+    
+    NODE_USER_STATUS nusf = [AuthN loggedInLastTimeUserName] ? NODE_USER_STATUS_EXISTING_USER : NODE_USER_STATUS_UNKNOWN;
+    char *username = (char*)[[AuthN loggedInLastTimeUserName] UTF8String];
+    char *password = (char*)[[AuthN getPasswordForUsername:[AuthN loggedInLastTimeUserName]] UTF8String];
+    if (username && password) send_user(nusf, username, password);
 }
 
 void creds_check_result(AUTHN_CREDS_CHECK_RESULT cr, char *username,
@@ -77,6 +94,7 @@ void creds_check_result(AUTHN_CREDS_CHECK_RESULT cr, char *username,
                  confirmed_client,
                  notify_existing_contact,
                  stay_touch_recd,
+                 contact_deinit_node,
                  add_contact_request,
                  contact_request_accepted,
                  contact_request_declined,
@@ -85,9 +103,7 @@ void creds_check_result(AUTHN_CREDS_CHECK_RESULT cr, char *username,
                  confirmed_peer_while_punching,
                  from_peer,
                  chat_msg,
-                 unhandled_response_from_server,
-                 whilew,
-                 end_while);
+                 unhandled_response_from_server);
             break;
         }
         case AUTHN_CREDS_CHECK_RESULT_USER_NOT_FOUND: {
@@ -109,64 +125,64 @@ void creds_check_result(AUTHN_CREDS_CHECK_RESULT cr, char *username,
     }
     char w[256];
     sprintf(w, "creds_check_result (%s)", creds_check_result_to_str(cr));
-    wlog2(w);
+    wlog2(w, INFO_LOG);
 }
 
 void self_info(char *w, unsigned short port, unsigned short chat_port, unsigned short family) {
     char e[256];
     sprintf(e, "self: %s p:%d cp:%d f:%d", w, port, chat_port, family);
-    wlog2(e);
+    wlog2(e, INFO_LOG);
 }
 
 void server_info(SERVER_TYPE st, char *w) {
     char e[256];
     sprintf(e, "server_info (%s) (%s)", str_from_server_type(st), w);
-    wlog2(e);
+    wlog2(e, INFO_LOG);
 }
 
 void socket_created(int sock_fd) {
     char w[256];
     sprintf(w, "The socket file descriptor is %d", sock_fd);
-    wlog2(w);
+    wlog2(w, INFO_LOG);
 }
 
 void socket_bound(void) {
     char *w = "The socket was bound";
-    wlog2(w);
+    wlog2(w, INFO_LOG);
 }
 
 void sendto_succeeded(size_t bytes_sent) {
     char w[256];
     sprintf(w, "sendto succeeded, %zu bytes sent", bytes_sent);
-    wlog2(w);
+    wlog2(w, INFO_LOG);
 }
 
 void recd(SERVER_TYPE st, size_t bytes_recd, socklen_t addr_len, char *w) {
     char e[256] = {0};
     sprintf(e, "recvfrom %s %zu %u %s", str_from_server_type(st), bytes_recd, addr_len, w);
-    wlog2(e);
+    wlog2(e, INFO_LOG);
 }
 
 void coll_buf(char *w) {
-    wlog2(w);
+    wlog2(w, INFO_LOG);
 }
 
 void new_client(SERVER_TYPE st, char *w) {
     char *st_str = str_from_server_type(st);
     char e[256];
     sprintf(e, "new_client %s %s", st_str, w);
-    wlog2(e);
+    wlog2(e, INFO_LOG);
 }
 
 void notify_existing_contact(char *w) {
     char e[256];
     sprintf(e, "EXISTING_CONTACT:%s", w);
-    wlog2(e);
+    wlog2(e, INFO_LOG);
     
     contact_list_t *contacts;
     list_contacts(&contacts);
     if (!contacts) {
-        wlog2("NO CONTACTS");
+        wlog2("NO CONTACTS", INFO_LOG);
         return;
     }
     contact_t *c = contacts->head;
@@ -185,12 +201,30 @@ void stay_touch_recd(SERVER_TYPE st) {
     char *st_str = str_from_server_type(st);
     char w[256];
     sprintf(w, "stay_touch_recd %s", st_str);
-    wlog2(w);
+    wlog2(w, INFO_LOG);
 }
 
 void confirmed_client() {
     char *w = "Confirmed client";
-    wlog2(w);
+    wlog2(w, INFO_LOG);
+}
+
+void contact_deinit_node(char *contactname) {
+    char e[256];
+    sprintf(e, "DEINIT_CONTACT_NODE:%s", contactname);
+    wlog2(e, INFO_LOG);
+    
+    contact_list_t *contacts;
+    list_contacts(&contacts);
+    contact_t *c = contacts->head;
+    while (c) {
+        if (0 == strcmp(contactname, c->hn->username)) {
+            char e[256];
+            sprintf(e, "DEINIT_CONTACT_NODE_222:(%s)(%d)", contactname, c->hn->nodes->node_count);
+            wlog2(e, INFO_LOG);
+        }
+        c = c->next;
+    }
 }
 
 void add_contact_request(char *username) {
@@ -199,7 +233,7 @@ void add_contact_request(char *username) {
     [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationAddContactRequest object:nil userInfo:d];
     char w[256];
     sprintf(w, "add_contact_request from %s", username);
-    wlog2(w);
+    wlog2(w, INFO_LOG);
 }
 
 void contact_request_accepted(char *username) {
@@ -208,7 +242,7 @@ void contact_request_accepted(char *username) {
     [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationContactRequestAccepted object:nil userInfo:d];
     char w[256];
     sprintf(w, "contact_request_accepted from %s", username);
-    wlog2(w);
+    wlog2(w, INFO_LOG);
 }
 
 void contact_request_declined(char *username) {
@@ -216,17 +250,17 @@ void contact_request_declined(char *username) {
     [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationContactRequestDeclined object:nil userInfo:d];
     char w[256];
     sprintf(w, "contact_request_declined from %s", username);
-    wlog2(w);
+    wlog2(w, INFO_LOG);
 }
 
 void new_peer(char *w) {
-    wlog2(w);
+    wlog2(w, INFO_LOG);
 }
 
 void hole_punch_sent(char *w, int t) {
     char wc [256];
     sprintf(wc, "%s count %d", w, t);
-    wlog2(wc);
+    wlog2(wc, INFO_LOG);
 }
 
 void confirmed_peer_while_punching(SERVER_TYPE st) {
@@ -243,37 +277,32 @@ void confirmed_peer_while_punching(SERVER_TYPE st) {
         default:
             break;
     }
-    wlog2(w);
+    wlog2(w, SEVERE_LOG);
 }
 
 void from_peer(SERVER_TYPE st, char *w) {
     char *st_str = str_from_server_type(st);
     char e[256];
     sprintf(e, "from_peer %s %s", st_str, w);
-    wlog2(e);
+    wlog2(e, INFO_LOG);
 }
 
 void chat_msg(char *w) {
     char e[256];
     sprintf(e, "$#$#$#$#$#$# %s", w);
-    wlog2(e);
+    wlog2(e, INFO_LOG);
 }
 
 void unhandled_response_from_server(int w) {
     char wc [100];
     sprintf(wc, "unhandled_response_from_server::%d", w);
-    wlog2(wc);
+    wlog2(wc, INFO_LOG);
 }
 
-void whilew(int w) {
+void general(char *w) {
     char wt[256];
-    sprintf(wt, "Meanwhile...%d\n", w);
-    wlog2(wt);
-}
-
-void end_while(void) {
-    char *w = "Ending while looping***************\n";
-    wlog2(w);
+    sprintf(wt, "GENERAL (%s)", w);
+    wlog2(wt, INFO_LOG);
 }
 
 @implementation UdpClientCallbacks

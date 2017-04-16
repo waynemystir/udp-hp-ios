@@ -9,19 +9,30 @@
 #import <UIKit/UIKit.h>
 #import "udp_client.h"
 
+typedef enum LOG_LEVEL {
+    DEBUG_LOG,
+    INFO_LOG,
+    WARNING_LOG,
+    SEVERE_LOG,
+} LOG_LEVEL;
+
 extern NSMutableArray *arrContacts;
 
-typedef void(*wlogCallback)(NSString *newStr, NSString *allLogs);
+typedef void(*wlogCallback)(NSString *newStr, NSString *allLogs, LOG_LEVEL log_level);
 
 NSString *addWlogCallback(wlogCallback);
 
-void wlog2(char *log);
+void wlog2(char *log, LOG_LEVEL log_level);
+
+void pfail_bc(char *err_msg);
 
 void rsakeypair_generated(const char *rsa_pub_key, const char *rsa_pri_key);
 
 void rsa_response(char *server_rsa_key);
 
 void aes_key_created(unsigned char *aes_key);
+
+void aes_response(NODE_USER_STATUS nus);
 
 void creds_check_result(AUTHN_CREDS_CHECK_RESULT cr, char *username,
                         char *password, unsigned char *authn_token);
@@ -48,6 +59,8 @@ void stay_touch_recd(SERVER_TYPE st);
 
 void confirmed_client();
 
+void contact_deinit_node(char *contactname);
+
 void add_contact_request(char *username);
 
 void contact_request_accepted(char *username);
@@ -66,9 +79,7 @@ void chat_msg(char *w);
 
 void unhandled_response_from_server(int w);
 
-void whilew(int w);
-
-void end_while(void);
+void general(char *w);
 
 @interface UdpClientCallbacks : NSObject
 

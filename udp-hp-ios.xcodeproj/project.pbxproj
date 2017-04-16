@@ -35,7 +35,6 @@
 		B0B64EA71E7B750000C6C807 /* ObjcContact.m in Sources */ = {isa = PBXBuildFile; fileRef = B0B64EA61E7B750000C6C807 /* ObjcContact.m */; };
 		B0B64EAA1E7C2B5500C6C807 /* ListContactsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0B64EA91E7C2B5500C6C807 /* ListContactsViewController.m */; };
 		B0B64EAE1E7C384C00C6C807 /* ContactViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0B64EAC1E7C384C00C6C807 /* ContactViewController.m */; };
-		B0B64EAF1E7C384C00C6C807 /* ContactViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B0B64EAD1E7C384C00C6C807 /* ContactViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -91,7 +90,6 @@
 		B0B64EA91E7C2B5500C6C807 /* ListContactsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ListContactsViewController.m; path = ../ListContactsViewController.m; sourceTree = "<group>"; };
 		B0B64EAB1E7C384C00C6C807 /* ContactViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactViewController.h; sourceTree = "<group>"; };
 		B0B64EAC1E7C384C00C6C807 /* ContactViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactViewController.m; sourceTree = "<group>"; };
-		B0B64EAD1E7C384C00C6C807 /* ContactViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContactViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,7 +142,6 @@
 				B07B37C71E90E1AE00C28664 /* CreateAccountViewController.m */,
 				B0B64EAB1E7C384C00C6C807 /* ContactViewController.h */,
 				B0B64EAC1E7C384C00C6C807 /* ContactViewController.m */,
-				B0B64EAD1E7C384C00C6C807 /* ContactViewController.xib */,
 				B06745AF1E94851D00D44D45 /* SearchUsersViewController.h */,
 				B06745B01E94851D00D44D45 /* SearchUsersViewController.m */,
 				B06745B21E99942E00D44D45 /* SearchUsersDetailViewController.h */,
@@ -266,7 +263,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				B01C67631E62B66C0026DC81 /* LaunchScreen.storyboard in Resources */,
-				B0B64EAF1E7C384C00C6C807 /* ContactViewController.xib in Resources */,
 				B01C67601E62B66C0026DC81 /* Assets.xcassets in Resources */,
 				B01C675E1E62B66C0026DC81 /* Main.storyboard in Resources */,
 			);
