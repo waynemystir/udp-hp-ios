@@ -295,7 +295,14 @@ void chat_msg(char *w) {
 }
 
 void video_start(char *server_host_url, char *room_id) {
-    
+    NSDictionary *d = @{
+                        @"server_host_url":[NSString stringWithUTF8String:server_host_url],
+                        @"room_id":[NSString stringWithUTF8String:room_id]
+                        };
+    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationIncomingCall object:nil userInfo:d];
+    char w[256];
+    sprintf(w, "video_startVVVVVVVVVVVVVVVVVVVV (%s)(%s)", server_host_url, room_id);
+    wlog2(w, INFO_LOG);
 }
 
 void unhandled_response_from_server(int w) {

@@ -484,6 +484,67 @@
             </objects>
             <point key="canvasLocation" x="1088.8" y="-646.32683658170924"/>
         </scene>
+        <!--Incoming Call View Controller-->
+        <scene sceneID="Ac5-J9-mYF">
+            <objects>
+                <viewController storyboardIdentifier="sbidIncomingCallVC" id="l0W-M5-FKO" customClass="IncomingCallViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="gtL-fp-q4R"/>
+                        <viewControllerLayoutGuide type="bottom" id="vga-nZ-y0b"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="G4V-Nf-1XI">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Incoming call from" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IKh-g8-jIM">
+                                <rect key="frame" x="57" y="127" width="260" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QLd-Eq-G4C">
+                                <rect key="frame" x="41" y="212" width="292" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3td-G8-CGx">
+                                <rect key="frame" x="33" y="313" width="307" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bru-lE-fyz">
+                                        <rect key="frame" x="41" y="29" width="80" height="70"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="Decline"/>
+                                        <connections>
+                                            <action selector="tapDecline:" destination="l0W-M5-FKO" eventType="touchUpInside" id="EJC-0l-Dze"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kD5-PF-jGK">
+                                        <rect key="frame" x="183" y="29" width="81" height="70"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="Answer"/>
+                                        <connections>
+                                            <action selector="tapAnswer:" destination="l0W-M5-FKO" eventType="touchUpInside" id="Os5-V0-zVI"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="usernameLabel" destination="QLd-Eq-G4C" id="Us8-HG-3zm"/>
+                        <segue destination="dev-sy-NCI" kind="show" identifier="sbidSegueIncomingToVideoVC" id="v1h-Za-bJl"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="P5c-cb-8ly" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2152.8000000000002" y="-617.54122938530736"/>
+        </scene>
         <!--List Contacts View Controller-->
         <scene sceneID="Ydr-UC-zmh">
             <objects>
@@ -584,7 +645,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lhh-NQ-Wfr" customClass="RTCEAGLVideoView">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="0.0"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kbd-Ot-HcP" customClass="RTCEAGLVideoView">
@@ -639,7 +700,7 @@
                             <constraint firstItem="lhh-NQ-Wfr" firstAttribute="top" secondItem="y0q-Ih-nIZ" secondAttribute="top" id="OQc-aV-7Sd"/>
                             <constraint firstItem="lhh-NQ-Wfr" firstAttribute="leading" secondItem="y0q-Ih-nIZ" secondAttribute="leading" id="OoR-N9-Jkt"/>
                             <constraint firstItem="C85-JB-ZIy" firstAttribute="centerY" secondItem="y0q-Ih-nIZ" secondAttribute="centerY" id="mmF-Dg-Sw9"/>
-                            <constraint firstAttribute="top" secondItem="lhh-NQ-Wfr" secondAttribute="bottom" id="rO1-1S-omV"/>
+                            <constraint firstAttribute="bottom" secondItem="lhh-NQ-Wfr" secondAttribute="bottom" id="rO1-1S-omV"/>
                         </constraints>
                     </view>
                     <nil key="simulatedTopBarMetrics"/>
@@ -666,4 +727,7 @@
             <point key="canvasLocation" x="2154" y="43"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="v1h-Za-bJl"/>
+    </inferredMetricsTieBreakers>
 </document>

@@ -20,6 +20,7 @@
 		B04A23F01E86FFAB005BC3EF /* crypto_wrapper.c in Sources */ = {isa = PBXBuildFile; fileRef = B04A23EE1E86FFAB005BC3EF /* crypto_wrapper.c */; };
 		B04A23F31E8705FD005BC3EF /* openssl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B04A23F21E8705FD005BC3EF /* openssl.framework */; };
 		B052D8221EA4438300C54F40 /* VideoCallViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B052D8211EA4438300C54F40 /* VideoCallViewController.m */; };
+		B052D8251EA45A4000C54F40 /* IncomingCallViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B052D8241EA45A4000C54F40 /* IncomingCallViewController.m */; };
 		B06745B11E94851D00D44D45 /* SearchUsersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B06745B01E94851D00D44D45 /* SearchUsersViewController.m */; };
 		B06745B41E99942E00D44D45 /* SearchUsersDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B06745B31E99942E00D44D45 /* SearchUsersDetailViewController.m */; };
 		B06745B71E99C6E600D44D45 /* NewContractRequestsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B06745B61E99C6E600D44D45 /* NewContractRequestsViewController.m */; };
@@ -66,6 +67,8 @@
 		B04A23F21E8705FD005BC3EF /* openssl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = openssl.framework; path = "../../OpenSSL-for-iPhone/openssl.framework"; sourceTree = "<group>"; };
 		B052D8201EA4438300C54F40 /* VideoCallViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoCallViewController.h; sourceTree = "<group>"; };
 		B052D8211EA4438300C54F40 /* VideoCallViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoCallViewController.m; sourceTree = "<group>"; };
+		B052D8231EA45A4000C54F40 /* IncomingCallViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IncomingCallViewController.h; sourceTree = "<group>"; };
+		B052D8241EA45A4000C54F40 /* IncomingCallViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IncomingCallViewController.m; sourceTree = "<group>"; };
 		B06745AF1E94851D00D44D45 /* SearchUsersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchUsersViewController.h; sourceTree = "<group>"; };
 		B06745B01E94851D00D44D45 /* SearchUsersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchUsersViewController.m; sourceTree = "<group>"; };
 		B06745B21E99942E00D44D45 /* SearchUsersDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchUsersDetailViewController.h; sourceTree = "<group>"; };
@@ -162,6 +165,8 @@
 				B0B64EAC1E7C384C00C6C807 /* ContactViewController.m */,
 				B052D8201EA4438300C54F40 /* VideoCallViewController.h */,
 				B052D8211EA4438300C54F40 /* VideoCallViewController.m */,
+				B052D8231EA45A4000C54F40 /* IncomingCallViewController.h */,
+				B052D8241EA45A4000C54F40 /* IncomingCallViewController.m */,
 				B06745AF1E94851D00D44D45 /* SearchUsersViewController.h */,
 				B06745B01E94851D00D44D45 /* SearchUsersViewController.m */,
 				B06745B21E99942E00D44D45 /* SearchUsersDetailViewController.h */,
@@ -354,6 +359,7 @@
 				B01C675B1E62B66C0026DC81 /* ViewController.m in Sources */,
 				B06745B41E99942E00D44D45 /* SearchUsersDetailViewController.m in Sources */,
 				B01C676C1E62BD9E0026DC81 /* udp_dev.c in Sources */,
+				B052D8251EA45A4000C54F40 /* IncomingCallViewController.m in Sources */,
 				B091E50E1E6E728C0009F3CD /* common.c in Sources */,
 				B0B64EAA1E7C2B5500C6C807 /* ListContactsViewController.m in Sources */,
 				B07B37C81E90E1AE00C28664 /* CreateAccountViewController.m in Sources */,

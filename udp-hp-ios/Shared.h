@@ -12,6 +12,7 @@ extern NSString * const kNotificationCredentialsCheckResult;
 extern NSString * const kNotificationAddContactRequest;
 extern NSString * const kNotificationContactRequestAccepted;
 extern NSString * const kNotificationContactRequestDeclined;
+extern NSString * const kNotificationIncomingCall;
 
 @interface Shared : NSObject
 

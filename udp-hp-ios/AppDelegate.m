@@ -12,6 +12,7 @@
 #import "UdpClientCallbacks.h"
 #import "Shared.h"
 #import "RTCPeerConnectionFactory.h"
+#import "IncomingCallViewController.h"
 
 @interface AppDelegate ()
 
@@ -36,9 +37,12 @@
     [nc setViewControllers:controllers];
 
     self.contactRequests = [@[] mutableCopy];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleNewContactRequest:) name:kNotificationAddContactRequest object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleContactRequestAccepted:) name:kNotificationContactRequestAccepted object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleContactRequestDeclined:) name:kNotificationContactRequestDeclined object:nil];
+
+    NSNotificationCenter *ndc = [NSNotificationCenter defaultCenter];
+    [ndc addObserver:self selector:@selector(handleNewContactRequest:) name:kNotificationAddContactRequest object:nil];
+    [ndc addObserver:self selector:@selector(handleContactRequestAccepted:) name:kNotificationContactRequestAccepted object:nil];
+    [ndc addObserver:self selector:@selector(handleContactRequestDeclined:) name:kNotificationContactRequestDeclined object:nil];
+    [ndc addObserver:self selector:@selector(handleIncomingCall:) name:kNotificationIncomingCall object:nil];
 
     [RTCPeerConnectionFactory initializeSSL];
     
@@ -64,6 +68,20 @@
     if (w && [w isKindOfClass:[NSString class]] && ![w isEqualToString:@""]) {
         [self.contactRequests removeObject:[w lowercaseString]];
     }
+}
+
+- (void)handleIncomingCall:(NSNotification*)notification {
+    NSString *serverUrl = [notification.userInfo objectForKey:@"server_host_url"];
+    NSString *roomId = [notification.userInfo objectForKey:@"room_id"];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        IncomingCallViewController *icvc = [storyboard instantiateViewControllerWithIdentifier:@"sbidIncomingCallVC"];
+        icvc.videoUrl = serverUrl;
+        icvc.roomId = roomId;
+        UINavigationController *nc = (UINavigationController *)self.window.rootViewController;
+        [nc pushViewController:icvc animated:YES];
+    });
 }
 
 - (void)letsAuthN {

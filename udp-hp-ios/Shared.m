@@ -12,6 +12,7 @@ NSString * const kNotificationCredentialsCheckResult = @"kNotificationCredential
 NSString * const kNotificationAddContactRequest = @"kNotificationAddContactRequest";
 NSString * const kNotificationContactRequestAccepted = @"kNotificationContactRequestAccepted";
 NSString * const kNotificationContactRequestDeclined = @"kNotificationContactRequestDeclined";
+NSString * const kNotificationIncomingCall = @"kNotificationIncomingCall";
 
 @implementation Shared
 
