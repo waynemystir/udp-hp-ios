@@ -564,11 +564,106 @@
                         <outlet property="chatHistoryTextView" destination="vca-8P-cs2" id="qbP-zZ-6sY"/>
                         <outlet property="contactUsernameLabel" destination="e7G-1w-Rqs" id="63p-OL-Qia"/>
                         <outlet property="messageTextField" destination="hui-Ek-OsB" id="xTg-vA-K05"/>
+                        <segue destination="dev-sy-NCI" kind="show" identifier="sbidSegueContactToVideoVC" id="db7-if-rBx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WRV-Va-9My" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1438" y="43"/>
+        </scene>
+        <!--Video Call View Controller-->
+        <scene sceneID="QAv-H0-kCy">
+            <objects>
+                <viewController storyboardIdentifier="sbidVideoCallVC" id="dev-sy-NCI" customClass="VideoCallViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="h6c-mq-dtm"/>
+                        <viewControllerLayoutGuide type="bottom" id="5bk-K3-S9l"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="y0q-Ih-nIZ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lhh-NQ-Wfr" customClass="RTCEAGLVideoView">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="0.0"/>
+                                <color key="backgroundColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kbd-Ot-HcP" customClass="RTCEAGLVideoView">
+                                <rect key="frame" x="227" y="519" width="120" height="120"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="120" id="NFc-mL-PBK"/>
+                                    <constraint firstAttribute="width" constant="120" id="l47-4M-Qom"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C85-JB-ZIy" userLabel="Button Container View">
+                                <rect key="frame" x="20" y="253.5" width="40" height="160"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OMe-sS-HlX">
+                                        <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="A"/>
+                                        <connections>
+                                            <action selector="audioButtonPressed:" destination="dev-sy-NCI" eventType="touchUpInside" id="Y7C-hI-byR"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M7B-CB-PMX">
+                                        <rect key="frame" x="0.0" y="59.5" width="40" height="40"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="V"/>
+                                        <connections>
+                                            <action selector="videoButtonPressed:" destination="dev-sy-NCI" eventType="touchUpInside" id="udF-R0-c6G"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DZc-89-F3e">
+                                        <rect key="frame" x="0.0" y="119.5" width="40" height="40"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="H"/>
+                                        <connections>
+                                            <action selector="hangupButtonPressed:" destination="dev-sy-NCI" eventType="touchUpInside" id="qHV-T1-m3J"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="160" id="Txt-ad-VQl"/>
+                                    <constraint firstAttribute="width" constant="40" id="yog-xK-6GA"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="Kbd-Ot-HcP" secondAttribute="trailing" constant="12" id="53e-32-Cof"/>
+                            <constraint firstAttribute="trailing" secondItem="lhh-NQ-Wfr" secondAttribute="trailing" id="Hyd-lg-I0t"/>
+                            <constraint firstItem="C85-JB-ZIy" firstAttribute="leading" secondItem="y0q-Ih-nIZ" secondAttribute="leadingMargin" constant="4" id="HzW-yS-lEF"/>
+                            <constraint firstAttribute="bottom" secondItem="Kbd-Ot-HcP" secondAttribute="bottom" constant="28" id="IqD-Du-gwO"/>
+                            <constraint firstItem="lhh-NQ-Wfr" firstAttribute="top" secondItem="y0q-Ih-nIZ" secondAttribute="top" id="OQc-aV-7Sd"/>
+                            <constraint firstItem="lhh-NQ-Wfr" firstAttribute="leading" secondItem="y0q-Ih-nIZ" secondAttribute="leading" id="OoR-N9-Jkt"/>
+                            <constraint firstItem="C85-JB-ZIy" firstAttribute="centerY" secondItem="y0q-Ih-nIZ" secondAttribute="centerY" id="mmF-Dg-Sw9"/>
+                            <constraint firstAttribute="top" secondItem="lhh-NQ-Wfr" secondAttribute="bottom" id="rO1-1S-omV"/>
+                        </constraints>
+                    </view>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <connections>
+                        <outlet property="audioButton" destination="OMe-sS-HlX" id="tAj-Zf-BUL"/>
+                        <outlet property="buttonContainerView" destination="C85-JB-ZIy" id="CuY-5d-8ef"/>
+                        <outlet property="buttonContainerViewLeftConstraint" destination="HzW-yS-lEF" id="CFV-VQ-bGl"/>
+                        <outlet property="hangupButton" destination="DZc-89-F3e" id="75Q-KX-qff"/>
+                        <outlet property="localView" destination="Kbd-Ot-HcP" id="Wbr-UD-We3"/>
+                        <outlet property="localViewBottomConstraint" destination="IqD-Du-gwO" id="mrU-bm-YM0"/>
+                        <outlet property="localViewHeightConstraint" destination="NFc-mL-PBK" id="mql-c7-LuQ"/>
+                        <outlet property="localViewRightConstraint" destination="53e-32-Cof" id="BG0-bL-tht"/>
+                        <outlet property="localViewWidthConstraint" destination="l47-4M-Qom" id="vE2-Fn-blI"/>
+                        <outlet property="remoteView" destination="lhh-NQ-Wfr" id="SuH-Fj-nsy"/>
+                        <outlet property="remoteViewBottomConstraint" destination="rO1-1S-omV" id="JTk-pA-7Xz"/>
+                        <outlet property="remoteViewLeftConstraint" destination="OoR-N9-Jkt" id="5s4-ns-T74"/>
+                        <outlet property="remoteViewRightConstraint" destination="Hyd-lg-I0t" id="TTN-uM-lqo"/>
+                        <outlet property="remoteViewTopConstraint" destination="OQc-aV-7Sd" id="W31-jg-Tsj"/>
+                        <outlet property="videoButton" destination="M7B-CB-PMX" id="a3L-cJ-PFn"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oib-eV-4JM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2154" y="43"/>
         </scene>
     </scenes>
 </document>

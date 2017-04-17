@@ -1,0 +1,51 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "E02842F9AF2A34B7F7E94EE74EB8DF841AC4BFCB",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "95075D6135004A71BB2547404C8D32084C740D45" : 9223372036854775807,
+    "E02842F9AF2A34B7F7E94EE74EB8DF841AC4BFCB" : 9223372036854775807,
+    "B4AAE2C6F501B18F615412A5312C788554CCD8C8" : 9223372036854775807,
+    "80A3CA3F37E21259B5B3FB4B56604D0374F02AFE" : 9223372036854775807,
+    "8092C8C7FB5C3FF769ACA4A4D09F354B1F39375F" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "0560D252-85DA-49BA-914B-064291E25186",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "95075D6135004A71BB2547404C8D32084C740D45" : "udp-hp\/",
+    "E02842F9AF2A34B7F7E94EE74EB8DF841AC4BFCB" : "udp-hp-ios\/",
+    "B4AAE2C6F501B18F615412A5312C788554CCD8C8" : "network\/",
+    "80A3CA3F37E21259B5B3FB4B56604D0374F02AFE" : "crypto_wrapper\/",
+    "8092C8C7FB5C3FF769ACA4A4D09F354B1F39375F" : "OpenSSL-for-iPhone\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "udp-hp-ios",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "udp-hp-ios.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:x2on\/OpenSSL-for-iPhone.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "8092C8C7FB5C3FF769ACA4A4D09F354B1F39375F"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:waynemystir\/crypto_wrapper.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "80A3CA3F37E21259B5B3FB4B56604D0374F02AFE"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:waynemystir\/udp-hp.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "95075D6135004A71BB2547404C8D32084C740D45"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:waynemystir\/network.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "B4AAE2C6F501B18F615412A5312C788554CCD8C8"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:waynemystir\/udp-hp-ios.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "E02842F9AF2A34B7F7E94EE74EB8DF841AC4BFCB"
+    }
+  ]
+}

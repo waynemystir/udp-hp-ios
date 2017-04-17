@@ -103,6 +103,7 @@ void creds_check_result(AUTHN_CREDS_CHECK_RESULT cr, char *username,
                  confirmed_peer_while_punching,
                  from_peer,
                  chat_msg,
+                 video_start,
                  unhandled_response_from_server);
             break;
         }
@@ -291,6 +292,10 @@ void chat_msg(char *w) {
     char e[256];
     sprintf(e, "$#$#$#$#$#$# %s", w);
     wlog2(e, INFO_LOG);
+}
+
+void video_start(char *server_host_url, char *room_id) {
+    
 }
 
 void unhandled_response_from_server(int w) {

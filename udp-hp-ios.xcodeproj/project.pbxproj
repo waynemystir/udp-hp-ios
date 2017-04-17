@@ -19,6 +19,7 @@
 		B04A23ED1E86F4AF005BC3EF /* WESKeyChain.m in Sources */ = {isa = PBXBuildFile; fileRef = B04A23EC1E86F4AF005BC3EF /* WESKeyChain.m */; };
 		B04A23F01E86FFAB005BC3EF /* crypto_wrapper.c in Sources */ = {isa = PBXBuildFile; fileRef = B04A23EE1E86FFAB005BC3EF /* crypto_wrapper.c */; };
 		B04A23F31E8705FD005BC3EF /* openssl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B04A23F21E8705FD005BC3EF /* openssl.framework */; };
+		B052D8221EA4438300C54F40 /* VideoCallViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B052D8211EA4438300C54F40 /* VideoCallViewController.m */; };
 		B06745B11E94851D00D44D45 /* SearchUsersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B06745B01E94851D00D44D45 /* SearchUsersViewController.m */; };
 		B06745B41E99942E00D44D45 /* SearchUsersDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B06745B31E99942E00D44D45 /* SearchUsersDetailViewController.m */; };
 		B06745B71E99C6E600D44D45 /* NewContractRequestsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B06745B61E99C6E600D44D45 /* NewContractRequestsViewController.m */; };
@@ -35,9 +36,13 @@
 		B0B64EA71E7B750000C6C807 /* ObjcContact.m in Sources */ = {isa = PBXBuildFile; fileRef = B0B64EA61E7B750000C6C807 /* ObjcContact.m */; };
 		B0B64EAA1E7C2B5500C6C807 /* ListContactsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0B64EA91E7C2B5500C6C807 /* ListContactsViewController.m */; };
 		B0B64EAE1E7C384C00C6C807 /* ContactViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0B64EAC1E7C384C00C6C807 /* ContactViewController.m */; };
+		C957BE3A3DCC57FA914F1704 /* libPods-udp-hp-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CD4467A580A122EB9B5B141 /* libPods-udp-hp-ios.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		29FAF532C84A261682D701D9 /* Pods-udp-hp-ios.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-udp-hp-ios.release.xcconfig"; path = "Pods/Target Support Files/Pods-udp-hp-ios/Pods-udp-hp-ios.release.xcconfig"; sourceTree = "<group>"; };
+		4CD4467A580A122EB9B5B141 /* libPods-udp-hp-ios.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-udp-hp-ios.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5AD58ADC6FA340006EA519F6 /* Pods-udp-hp-ios.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-udp-hp-ios.debug.xcconfig"; path = "Pods/Target Support Files/Pods-udp-hp-ios/Pods-udp-hp-ios.debug.xcconfig"; sourceTree = "<group>"; };
 		B01C67501E62B66C0026DC81 /* udp-hp-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "udp-hp-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B01C67541E62B66C0026DC81 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		B01C67561E62B66C0026DC81 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -59,6 +64,8 @@
 		B04A23EE1E86FFAB005BC3EF /* crypto_wrapper.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = crypto_wrapper.c; path = ../../crypto_wrapper/crypto_wrapper.c; sourceTree = "<group>"; };
 		B04A23EF1E86FFAB005BC3EF /* crypto_wrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = crypto_wrapper.h; path = ../../crypto_wrapper/crypto_wrapper.h; sourceTree = "<group>"; };
 		B04A23F21E8705FD005BC3EF /* openssl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = openssl.framework; path = "../../OpenSSL-for-iPhone/openssl.framework"; sourceTree = "<group>"; };
+		B052D8201EA4438300C54F40 /* VideoCallViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoCallViewController.h; sourceTree = "<group>"; };
+		B052D8211EA4438300C54F40 /* VideoCallViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoCallViewController.m; sourceTree = "<group>"; };
 		B06745AF1E94851D00D44D45 /* SearchUsersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchUsersViewController.h; sourceTree = "<group>"; };
 		B06745B01E94851D00D44D45 /* SearchUsersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchUsersViewController.m; sourceTree = "<group>"; };
 		B06745B21E99942E00D44D45 /* SearchUsersDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchUsersDetailViewController.h; sourceTree = "<group>"; };
@@ -99,12 +106,22 @@
 			files = (
 				B06745E31E9C621800D44D45 /* AudioToolbox.framework in Frameworks */,
 				B04A23F31E8705FD005BC3EF /* openssl.framework in Frameworks */,
+				C957BE3A3DCC57FA914F1704 /* libPods-udp-hp-ios.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		73D5FD3DD54F0FB45CB4CD9B /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				5AD58ADC6FA340006EA519F6 /* Pods-udp-hp-ios.debug.xcconfig */,
+				29FAF532C84A261682D701D9 /* Pods-udp-hp-ios.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		B01C67471E62B66B0026DC81 = {
 			isa = PBXGroup;
 			children = (
@@ -112,6 +129,7 @@
 				B04A23F11E8705CF005BC3EF /* Dependencies */,
 				B01C67511E62B66C0026DC81 /* Products */,
 				B06745E11E9C621800D44D45 /* Frameworks */,
+				73D5FD3DD54F0FB45CB4CD9B /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -142,6 +160,8 @@
 				B07B37C71E90E1AE00C28664 /* CreateAccountViewController.m */,
 				B0B64EAB1E7C384C00C6C807 /* ContactViewController.h */,
 				B0B64EAC1E7C384C00C6C807 /* ContactViewController.m */,
+				B052D8201EA4438300C54F40 /* VideoCallViewController.h */,
+				B052D8211EA4438300C54F40 /* VideoCallViewController.m */,
 				B06745AF1E94851D00D44D45 /* SearchUsersViewController.h */,
 				B06745B01E94851D00D44D45 /* SearchUsersViewController.m */,
 				B06745B21E99942E00D44D45 /* SearchUsersDetailViewController.h */,
@@ -199,6 +219,7 @@
 			isa = PBXGroup;
 			children = (
 				B06745E21E9C621800D44D45 /* AudioToolbox.framework */,
+				4CD4467A580A122EB9B5B141 /* libPods-udp-hp-ios.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -210,9 +231,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B01C67671E62B66C0026DC81 /* Build configuration list for PBXNativeTarget "udp-hp-ios" */;
 			buildPhases = (
+				097A06B0098AF49C98611766 /* [CP] Check Pods Manifest.lock */,
 				B01C674C1E62B66C0026DC81 /* Sources */,
 				B01C674D1E62B66C0026DC81 /* Frameworks */,
 				B01C674E1E62B66C0026DC81 /* Resources */,
+				2B926723A4410957CC822149 /* [CP] Embed Pods Frameworks */,
+				4455094FD8BCB1F72AADC94B /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -270,6 +294,54 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		097A06B0098AF49C98611766 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		2B926723A4410957CC822149 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-udp-hp-ios/Pods-udp-hp-ios-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		4455094FD8BCB1F72AADC94B /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-udp-hp-ios/Pods-udp-hp-ios-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		B01C674C1E62B66C0026DC81 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -289,6 +361,7 @@
 				B06745B71E99C6E600D44D45 /* NewContractRequestsViewController.m in Sources */,
 				B01C67581E62B66C0026DC81 /* AppDelegate.m in Sources */,
 				B04A23F01E86FFAB005BC3EF /* crypto_wrapper.c in Sources */,
+				B052D8221EA4438300C54F40 /* VideoCallViewController.m in Sources */,
 				B07B37CE1E91BD0500C28664 /* Shared.m in Sources */,
 				B0B64EA41E78E9F300C6C807 /* hashtable.c in Sources */,
 				B04A23ED1E86F4AF005BC3EF /* WESKeyChain.m in Sources */,
@@ -413,11 +486,16 @@
 		};
 		B01C67681E62B66C0026DC81 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5AD58ADC6FA340006EA519F6 /* Pods-udp-hp-ios.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 5XRU7BNPTX;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/../OpenSSL-for-iPhone";
-				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/../udp-hp";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/../udp-hp",
+				);
 				INFOPLIST_FILE = "udp-hp-ios/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "waynemystir.udp-hp-ios";
@@ -427,11 +505,16 @@
 		};
 		B01C67691E62B66C0026DC81 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 29FAF532C84A261682D701D9 /* Pods-udp-hp-ios.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 5XRU7BNPTX;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/../OpenSSL-for-iPhone";
-				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/../udp-hp";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/../udp-hp",
+				);
 				INFOPLIST_FILE = "udp-hp-ios/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "waynemystir.udp-hp-ios";

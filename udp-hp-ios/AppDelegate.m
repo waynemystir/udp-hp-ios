@@ -11,6 +11,7 @@
 #import "udp_client.h"
 #import "UdpClientCallbacks.h"
 #import "Shared.h"
+#import "RTCPeerConnectionFactory.h"
 
 @interface AppDelegate ()
 
@@ -38,6 +39,8 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleNewContactRequest:) name:kNotificationAddContactRequest object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleContactRequestAccepted:) name:kNotificationContactRequestAccepted object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleContactRequestDeclined:) name:kNotificationContactRequestDeclined object:nil];
+
+    [RTCPeerConnectionFactory initializeSSL];
     
     return YES;
 }
@@ -108,6 +111,7 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    [RTCPeerConnectionFactory deinitializeSSL];
 }
 
 

@@ -77,6 +77,8 @@ void from_peer(SERVER_TYPE st, char *w);
 
 void chat_msg(char *w);
 
+void video_start(char *server_host_url, char *room_id);
+
 void unhandled_response_from_server(int w);
 
 void general(char *w);
