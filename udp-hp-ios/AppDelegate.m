@@ -13,6 +13,7 @@
 #import "Shared.h"
 #import "RTCPeerConnectionFactory.h"
 #import "IncomingCallViewController.h"
+#import <AVFoundation/AVFoundation.h>
 
 @interface AppDelegate ()
 
@@ -43,6 +44,7 @@
     [ndc addObserver:self selector:@selector(handleContactRequestAccepted:) name:kNotificationContactRequestAccepted object:nil];
     [ndc addObserver:self selector:@selector(handleContactRequestDeclined:) name:kNotificationContactRequestDeclined object:nil];
     [ndc addObserver:self selector:@selector(handleIncomingCall:) name:kNotificationIncomingCall object:nil];
+    [ndc addObserver:self selector:@selector(didSessionRouteChange:) name:AVAudioSessionRouteChangeNotification object:nil];
 
     [RTCPeerConnectionFactory initializeSSL];
     
@@ -82,6 +84,25 @@
         UINavigationController *nc = (UINavigationController *)self.window.rootViewController;
         [nc pushViewController:icvc animated:YES];
     });
+}
+
+// curtesy of phuongle: http://stackoverflow.com/questions/24595579/how-to-redirect-audio-to-speakers-in-the-apprtc-ios-example
+- (void)didSessionRouteChange:(NSNotification *)notification
+{
+    NSDictionary *interuptionDict = notification.userInfo;
+    NSInteger routeChangeReason = [[interuptionDict valueForKey:AVAudioSessionRouteChangeReasonKey] integerValue];
+    
+    switch (routeChangeReason) {
+        case AVAudioSessionRouteChangeReasonCategoryChange: {
+            // Set speaker as default route
+            NSError* error;
+            [[AVAudioSession sharedInstance] overrideOutputAudioPort:AVAudioSessionPortOverrideSpeaker error:&error];
+        }
+            break;
+            
+        default:
+            break;
+    }
 }
 
 - (void)letsAuthN {
