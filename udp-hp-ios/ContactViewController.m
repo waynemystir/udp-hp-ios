@@ -64,6 +64,7 @@
     // Pass the selected object to the new view controller.
     if ([segue.identifier isEqualToString:@"sbidSegueContactToVideoVC"]) {
         VideoCallViewController *vcvc = segue.destinationViewController;
+        vcvc.viewControllerToPopTo = self;
         vcvc.serverHostUrl = self.videoUrl;
         vcvc.roomName = self.roomId;
     }

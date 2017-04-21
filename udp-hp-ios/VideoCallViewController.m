@@ -168,7 +168,9 @@
 - (IBAction)hangupButtonPressed:(id)sender {
     //Clean up
     [self disconnect];
-    [self.navigationController popViewControllerAnimated:YES];
+    if (self.viewControllerToPopTo)
+        [self.navigationController popToViewController:self.viewControllerToPopTo animated:YES];
+    else [self.navigationController popViewControllerAnimated:YES];
 }
 
 

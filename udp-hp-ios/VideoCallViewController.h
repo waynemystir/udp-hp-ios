@@ -12,6 +12,7 @@
 
 @interface VideoCallViewController : UIViewController <ARDAppClientDelegate, RTCEAGLVideoViewDelegate>
 
+@property (nonatomic, weak) UIViewController *viewControllerToPopTo;
 @property (weak, nonatomic) IBOutlet RTCEAGLVideoView *remoteView;
 @property (weak, nonatomic) IBOutlet RTCEAGLVideoView *localView;
 @property (weak, nonatomic) IBOutlet UIView *buttonContainerView;

@@ -99,6 +99,7 @@ void creds_check_result(AUTHN_CREDS_CHECK_RESULT cr, char *username,
                  contact_request_accepted,
                  contact_request_declined,
                  new_peer,
+                 proceed_chat_hp,
                  hole_punch_sent,
                  confirmed_peer_while_punching,
                  from_peer,
@@ -255,6 +256,10 @@ void contact_request_declined(char *username) {
 }
 
 void new_peer(char *w) {
+    wlog2(w, INFO_LOG);
+}
+
+void proceed_chat_hp(char *w) {
     wlog2(w, INFO_LOG);
 }
 
