@@ -586,51 +586,56 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Username" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e7G-1w-Rqs">
-                                <rect key="frame" x="66" y="97" width="243" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="vca-8P-cs2">
-                                <rect key="frame" x="16" y="138" width="343" height="457"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="vca-8P-cs2">
+                                <rect key="frame" x="16" y="79" width="343" height="537"/>
+                                <color key="backgroundColor" red="0.8666666666666667" green="0.8666666666666667" blue="0.8666666666666667" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hui-Ek-OsB">
-                                <rect key="frame" x="16" y="617" width="343" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hui-Ek-OsB">
+                                <rect key="frame" x="16" y="627" width="343" height="30"/>
                                 <color key="backgroundColor" red="0.39947513159999998" green="1" blue="0.86903863069999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="VZ4-ok-Yct"/>
+                                </constraints>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YYg-Do-HCZ">
-                                <rect key="frame" x="311" y="95" width="35" height="40"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="27"/>
-                                <state key="normal" title="V"/>
-                                <connections>
-                                    <action selector="startVideoCall:" destination="923-Uw-L37" eventType="touchUpInside" id="G5L-kc-kVf"/>
-                                </connections>
-                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QdU-85-XaY" userLabel="BottomPadding">
+                                <rect key="frame" x="16" y="657" width="343" height="10"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="10" id="Fwg-s9-ACt"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="hui-Ek-OsB" firstAttribute="leading" secondItem="qRx-Fj-mIy" secondAttribute="leadingMargin" id="5bs-2n-9e3"/>
+                            <constraint firstItem="vca-8P-cs2" firstAttribute="leading" secondItem="qRx-Fj-mIy" secondAttribute="leadingMargin" id="LC6-MY-Are"/>
+                            <constraint firstItem="QdU-85-XaY" firstAttribute="top" secondItem="hui-Ek-OsB" secondAttribute="bottom" id="XVz-xc-LlC"/>
+                            <constraint firstItem="QdU-85-XaY" firstAttribute="leading" secondItem="qRx-Fj-mIy" secondAttribute="leadingMargin" id="Xhr-yV-HvE"/>
+                            <constraint firstItem="QdU-85-XaY" firstAttribute="trailing" secondItem="qRx-Fj-mIy" secondAttribute="trailingMargin" id="czz-cm-e85"/>
+                            <constraint firstItem="vca-8P-cs2" firstAttribute="top" secondItem="erR-oG-ftp" secondAttribute="bottom" constant="15" id="eAE-Lm-NwT"/>
+                            <constraint firstItem="hui-Ek-OsB" firstAttribute="top" secondItem="vca-8P-cs2" secondAttribute="bottom" constant="11" id="fxX-ZJ-GUQ"/>
+                            <constraint firstItem="WOL-ZQ-M15" firstAttribute="top" secondItem="QdU-85-XaY" secondAttribute="bottom" id="j4L-vD-O5a"/>
+                            <constraint firstItem="QdU-85-XaY" firstAttribute="top" secondItem="hui-Ek-OsB" secondAttribute="bottom" id="n8m-tg-sKZ"/>
+                            <constraint firstItem="hui-Ek-OsB" firstAttribute="trailing" secondItem="qRx-Fj-mIy" secondAttribute="trailingMargin" id="nBX-dM-QAW"/>
+                            <constraint firstItem="vca-8P-cs2" firstAttribute="trailing" secondItem="qRx-Fj-mIy" secondAttribute="trailingMargin" id="ope-Yg-FqA"/>
+                        </constraints>
                     </view>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="chatHistoryTextView" destination="vca-8P-cs2" id="qbP-zZ-6sY"/>
-                        <outlet property="contactUsernameLabel" destination="e7G-1w-Rqs" id="63p-OL-Qia"/>
+                        <outlet property="constraintBottomPadding" destination="j4L-vD-O5a" id="hM6-gz-6hB"/>
                         <outlet property="messageTextField" destination="hui-Ek-OsB" id="xTg-vA-K05"/>
                         <segue destination="dev-sy-NCI" kind="show" identifier="sbidSegueContactToVideoVC" id="db7-if-rBx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WRV-Va-9My" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1438" y="43"/>
+            <point key="canvasLocation" x="1437.5999999999999" y="42.728635682158924"/>
         </scene>
         <!--Video Call View Controller-->
         <scene sceneID="QAv-H0-kCy">

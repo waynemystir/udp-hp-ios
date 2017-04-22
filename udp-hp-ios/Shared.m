@@ -8,11 +8,14 @@
 
 #import "Shared.h"
 
+NSString *chatHistory = @"";
+
 NSString * const kNotificationCredentialsCheckResult = @"kNotificationCredentialsCheckResult";
 NSString * const kNotificationAddContactRequest = @"kNotificationAddContactRequest";
 NSString * const kNotificationContactRequestAccepted = @"kNotificationContactRequestAccepted";
 NSString * const kNotificationContactRequestDeclined = @"kNotificationContactRequestDeclined";
 NSString * const kNotificationIncomingCall = @"kNotificationIncomingCall";
+NSString * const kNotificationChatMsgRecd = @"kNotificationChatMsgRecd";
 
 @implementation Shared
 

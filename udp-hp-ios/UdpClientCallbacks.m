@@ -12,6 +12,26 @@
 #import "ObjcContact.h"
 #import "Shared.h"
 #import <AudioToolbox/AudioToolbox.h>
+#import <pthread.h>
+
+static pthread_once_t env_once = PTHREAD_ONCE_INIT;
+static ENVIRONMENT environment;
+static pthread_once_t mutexes_once = PTHREAD_ONCE_INIT;
+static pthread_mutex_t wLogsLock;
+int tErr;
+
+void init_local_environment() {
+    environment = PROD;
+}
+
+void init_mutexes() {
+    tErr = pthread_mutex_init(&wLogsLock, NULL);
+}
+
+void init_environment() {
+    pthread_once(&env_once, init_local_environment);
+    pthread_once(&mutexes_once, init_mutexes);
+}
 
 @interface WlogDelegate : NSObject
 @property (nonatomic) wlogCallback callback;
@@ -33,13 +53,20 @@ NSString *addWlogCallback(wlogCallback callback) {
 }
 
 void wlog2(char *log, LOG_LEVEL log_level) {
+    pthread_mutex_lock(&wLogsLock);
     char w[512] = {0};
     sprintf(w, "%s\n", log);
     printf("%s", w);
+    if (log_level < INFO_LOG && environment == PROD) {
+        pthread_mutex_unlock(&wLogsLock);
+        return;
+    }
+
     NSString *newLog = [NSString stringWithUTF8String:w];
     wLogs = [wLogs stringByAppendingString:newLog];
     for (WlogDelegate *d in delegates)
         if (d.callback) d.callback(newLog, wLogs, log_level);
+    pthread_mutex_unlock(&wLogsLock);
 }
 
 void pfail_bc(char *err_msg) {
@@ -266,7 +293,7 @@ void proceed_chat_hp(char *w) {
 void hole_punch_sent(char *w, int t) {
     char wc [256];
     sprintf(wc, "%s count %d", w, t);
-    wlog2(wc, INFO_LOG);
+    wlog2(wc, DEBUG_LOG);
 }
 
 void confirmed_peer_while_punching(SERVER_TYPE st) {
@@ -293,9 +320,14 @@ void from_peer(SERVER_TYPE st, char *w) {
     wlog2(e, INFO_LOG);
 }
 
-void chat_msg(char *w) {
+void chat_msg(char *username, char *msg) {
+    NSDictionary *d = @{
+                        @"username":[NSString stringWithUTF8String:username],
+                        @"msg":[NSString stringWithUTF8String:msg]
+                        };
+    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationChatMsgRecd object:nil userInfo:d];
     char e[256];
-    sprintf(e, "$#$#$#$#$#$# %s", w);
+    sprintf(e, "$#$#$#$#$#$# (%s):(%s)", username, msg);
     wlog2(e, INFO_LOG);
 }
 

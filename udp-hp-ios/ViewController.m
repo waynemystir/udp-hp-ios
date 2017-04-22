@@ -111,6 +111,22 @@ void logsCallback(NSString *newLog, NSString *allLogs, LOG_LEVEL log_level) {
 - (IBAction)tapLogOut:(id)sender {
     [AuthN Signout];
     signout();
+    [AuthN setLoggedInLastTimeUserName:nil];
+    authn(NODE_USER_STATUS_UNKNOWN,
+          [[AuthN loggedInLastTimeUserName] UTF8String],
+          [[AuthN getPasswordForUsername:[AuthN loggedInLastTimeUserName]] UTF8String],
+          AUTHN_STATUS_RSA_SWAP,
+          [AuthN getRSAPubKey],
+          [AuthN getRSAPriKey],
+          [AuthN getAESKey],
+          pfail_bc,
+          rsakeypair_generated,
+          recd,
+          rsa_response,
+          aes_key_created,
+          aes_response,
+          creds_check_result,
+          general);
     UINavigationController *nc = self.navigationController;
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     UIViewController *rvc = [storyboard instantiateViewControllerWithIdentifier:@"sbidLoginVC"];

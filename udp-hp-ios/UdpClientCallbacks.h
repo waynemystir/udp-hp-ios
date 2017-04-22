@@ -9,12 +9,19 @@
 #import <UIKit/UIKit.h>
 #import "udp_client.h"
 
+typedef enum ENVIRONMENT {
+    DEV = 0,
+    PROD = 1,
+} ENVIRONMENT;
+
 typedef enum LOG_LEVEL {
-    DEBUG_LOG,
-    INFO_LOG,
-    WARNING_LOG,
-    SEVERE_LOG,
+    DEBUG_LOG = 0,
+    INFO_LOG = 1,
+    WARNING_LOG = 2,
+    SEVERE_LOG = 3,
 } LOG_LEVEL;
+
+void init_environment();
 
 extern NSMutableArray *arrContacts;
 
@@ -77,7 +84,7 @@ void confirmed_peer_while_punching(SERVER_TYPE st);
 
 void from_peer(SERVER_TYPE st, char *w);
 
-void chat_msg(char *w);
+void chat_msg(char *username, char *msg);
 
 void video_start(char *server_host_url, char *room_id);
 

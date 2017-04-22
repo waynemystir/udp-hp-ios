@@ -81,10 +81,6 @@
             send_user(NODE_USER_STATUS_NEW_USER,
                       (char*)[self.usernameTextfield.text UTF8String],
                       (char*)[self.passwordTextfield.text UTF8String]);
-            UINavigationController *nc = self.navigationController;
-            [nc popViewControllerAnimated:YES];
-            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-            [nc pushViewController:[storyboard instantiateViewControllerWithIdentifier:@"sbidMainVC"] animated:YES];
         }
     }
     return YES;
