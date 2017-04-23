@@ -76,7 +76,8 @@ void pfail_bc(char *err_msg) {
 }
 
 void rsakeypair_generated(const char *rsa_pub_key, const char *rsa_pri_key) {
-    
+    [AuthN setRSAPubKey:(char*)rsa_pub_key];
+    [AuthN setRSAPriKey:(char*)rsa_pri_key];
 }
 
 void rsa_response(char *server_rsa_key) {
@@ -88,7 +89,7 @@ void rsa_response(char *server_rsa_key) {
 void aes_key_created(unsigned char *aes_key) {
     [AuthN setAESKey:[NSData dataWithBytes:aes_key length:NUM_BYTES_AES_KEY]];
     char w[640];
-    sprintf(w, "AES key created (%s)(%lu)", [AuthN getAESKey], [AuthN getSizeOfAESKey]);
+    sprintf(w, "AES key created (%lu)", [AuthN getSizeOfAESKey]);
     wlog2(w, INFO_LOG);
 }
 

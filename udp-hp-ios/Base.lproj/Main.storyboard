@@ -496,23 +496,26 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Incoming call from" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IKh-g8-jIM">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Incoming call from" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IKh-g8-jIM">
                                 <rect key="frame" x="57" y="127" width="260" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="260" id="q5r-1E-rr9"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QLd-Eq-G4C">
-                                <rect key="frame" x="41" y="212" width="292" height="40"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QLd-Eq-G4C">
+                                <rect key="frame" x="41" y="212" width="292" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="79l-NR-Q4x"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3td-G8-CGx">
-                                <rect key="frame" x="33" y="313" width="307" height="128"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3td-G8-CGx">
+                                <rect key="frame" x="34" y="313" width="307" height="128"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bru-lE-fyz">
                                         <rect key="frame" x="41" y="29" width="80" height="70"/>
@@ -532,9 +535,24 @@
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="128" id="QSh-0n-Re4"/>
+                                    <constraint firstAttribute="width" constant="307" id="mb6-IO-eYU"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="IKh-g8-jIM" firstAttribute="centerX" secondItem="G4V-Nf-1XI" secondAttribute="centerX" id="3T7-F0-Umn"/>
+                            <constraint firstItem="3td-G8-CGx" firstAttribute="top" secondItem="QLd-Eq-G4C" secondAttribute="bottom" constant="71" id="Bcw-uz-Wvg"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="QLd-Eq-G4C" secondAttribute="trailing" constant="26" id="LWS-ox-W3j"/>
+                            <constraint firstItem="QLd-Eq-G4C" firstAttribute="leading" secondItem="G4V-Nf-1XI" secondAttribute="leadingMargin" constant="25" id="M4k-J0-eJg"/>
+                            <constraint firstItem="QLd-Eq-G4C" firstAttribute="centerX" secondItem="G4V-Nf-1XI" secondAttribute="centerX" id="ccy-8r-lcH"/>
+                            <constraint firstItem="QLd-Eq-G4C" firstAttribute="top" secondItem="IKh-g8-jIM" secondAttribute="bottom" constant="64" id="jcw-FA-JeK"/>
+                            <constraint firstItem="3td-G8-CGx" firstAttribute="centerX" secondItem="G4V-Nf-1XI" secondAttribute="centerX" id="jdF-ZA-7M7"/>
+                            <constraint firstItem="IKh-g8-jIM" firstAttribute="top" secondItem="gtL-fp-q4R" secondAttribute="bottom" constant="107" id="vxX-PB-w8n"/>
+                            <constraint firstItem="3td-G8-CGx" firstAttribute="top" secondItem="QLd-Eq-G4C" secondAttribute="bottom" constant="71" id="yqq-4i-Lby"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="usernameLabel" destination="QLd-Eq-G4C" id="Us8-HG-3zm"/>
@@ -733,6 +751,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="db7-if-rBx"/>
+        <segue reference="v1h-Za-bJl"/>
     </inferredMetricsTieBreakers>
 </document>
