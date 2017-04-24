@@ -129,6 +129,7 @@ void logsCallback(NSString *newLog, NSString *allLogs, LOG_LEVEL log_level) {
           creds_check_result,
           server_connection_failure,
           general);
+    [arrContacts removeAllObjects];
     UINavigationController *nc = self.navigationController;
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     UIViewController *rvc = [storyboard instantiateViewControllerWithIdentifier:@"sbidLoginVC"];
