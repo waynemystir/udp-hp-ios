@@ -15,21 +15,20 @@
 #import <pthread.h>
 
 static pthread_once_t env_once = PTHREAD_ONCE_INIT;
-static ENVIRONMENT environment;
 static pthread_once_t mutexes_once = PTHREAD_ONCE_INIT;
 static pthread_mutex_t wLogsLock;
 int tErr;
 
-void init_local_environment() {
-    environment = PROD;
+void init_environment() {
+    set_environment(ENV_PROD);
 }
 
 void init_mutexes() {
     tErr = pthread_mutex_init(&wLogsLock, NULL);
 }
 
-void init_environment() {
-    pthread_once(&env_once, init_local_environment);
+void init_app_settings() {
+    pthread_once(&env_once, init_environment);
     pthread_once(&mutexes_once, init_mutexes);
 }
 
@@ -57,7 +56,8 @@ void wlog2(char *log, LOG_LEVEL log_level) {
     char w[512] = {0};
     sprintf(w, "%s\n", log);
     printf("%s", w);
-    if (log_level < INFO_LOG && environment == PROD) {
+    if ((log_level < INFO_LOG && get_environment() == ENV_PROD)
+            || (log_level == NO_UI_LOG)) {
         pthread_mutex_unlock(&wLogsLock);
         return;
     }
@@ -78,25 +78,28 @@ void pfail_bc(char *err_msg) {
 void rsakeypair_generated(const char *rsa_pub_key, const char *rsa_pri_key) {
     [AuthN setRSAPubKey:(char*)rsa_pub_key];
     [AuthN setRSAPriKey:(char*)rsa_pri_key];
+    char w[2048];
+    sprintf(w, "self_rsa_pub_key_gen (%s) self_rsa_pri_key_gen (%s)", rsa_pub_key, rsa_pri_key);
+    wlog2(w, NO_UI_LOG);
 }
 
 void rsa_response(char *server_rsa_key) {
     char w[640];
     sprintf(w, "server's public key strlen (%lu)", strlen(server_rsa_key));
-    wlog2(w, INFO_LOG);
+    wlog2(w, NO_UI_LOG);
 }
 
 void aes_key_created(unsigned char *aes_key) {
     [AuthN setAESKey:[NSData dataWithBytes:aes_key length:NUM_BYTES_AES_KEY]];
     char w[640];
     sprintf(w, "AES key created (%lu)", [AuthN getSizeOfAESKey]);
-    wlog2(w, INFO_LOG);
+    wlog2(w, NO_UI_LOG);
 }
 
 void aes_response(NODE_USER_STATUS nus) {
     char w[256];
     sprintf(w, "aes_response (%s)", node_user_status_to_str(nus));
-    wlog2(w, INFO_LOG);
+    wlog2(w, NO_UI_LOG);
     
     NODE_USER_STATUS nusf = [AuthN loggedInLastTimeUserName] ? NODE_USER_STATUS_EXISTING_USER : NODE_USER_STATUS_UNKNOWN;
     char *username = (char*)[[AuthN loggedInLastTimeUserName] UTF8String];
@@ -173,12 +176,12 @@ void server_info(SERVER_TYPE st, char *w) {
 void socket_created(int sock_fd) {
     char w[256];
     sprintf(w, "The socket file descriptor is %d", sock_fd);
-    wlog2(w, INFO_LOG);
+    wlog2(w, DEBUG_LOG);
 }
 
 void socket_bound(void) {
     char *w = "The socket was bound";
-    wlog2(w, INFO_LOG);
+    wlog2(w, DEBUG_LOG);
 }
 
 void sendto_succeeded(size_t bytes_sent) {
@@ -190,7 +193,7 @@ void sendto_succeeded(size_t bytes_sent) {
 void recd(SERVER_TYPE st, size_t bytes_recd, socklen_t addr_len, char *w) {
     char e[256] = {0};
     sprintf(e, "recvfrom %s %zu %u %s", str_from_server_type(st), bytes_recd, addr_len, w);
-    wlog2(e, INFO_LOG);
+    wlog2(e, DEBUG_LOG);
 }
 
 void coll_buf(char *w) {
@@ -231,7 +234,7 @@ void stay_touch_recd(SERVER_TYPE st) {
     char *st_str = str_from_server_type(st);
     char w[256];
     sprintf(w, "stay_touch_recd %s", st_str);
-    wlog2(w, INFO_LOG);
+    wlog2(w, NO_UI_LOG);
 }
 
 void confirmed_client() {
@@ -294,7 +297,8 @@ void proceed_chat_hp(char *w) {
 void hole_punch_sent(char *w, int t) {
     char wc [256];
     sprintf(wc, "%s count %d", w, t);
-    wlog2(wc, DEBUG_LOG);
+    int modulo = t % 40;
+    wlog2(wc, !modulo ? INFO_LOG : NO_UI_LOG);
 }
 
 void confirmed_peer_while_punching(SERVER_TYPE st) {
@@ -346,13 +350,20 @@ void video_start(char *server_host_url, char *room_id) {
 void unhandled_response_from_server(int w) {
     char wc [100];
     sprintf(wc, "unhandled_response_from_server::%d", w);
-    wlog2(wc, INFO_LOG);
+    wlog2(wc, SEVERE_LOG);
 }
 
-void general(char *w) {
+void server_connection_failure(SERVER_TYPE st, char *w) {
+    char *st_str = str_from_server_type(st);
+    char wc[256];
+    sprintf(wc, "%s: %s", st_str, w);
+    wlog2(wc, SEVERE_LOG);
+}
+
+void general(char *w, LOG_LEVEL log_level) {
     char wt[256];
     sprintf(wt, "GENERAL (%s)", w);
-    wlog2(wt, INFO_LOG);
+    wlog2(wt, log_level);
 }
 
 @implementation UdpClientCallbacks

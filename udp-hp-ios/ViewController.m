@@ -26,6 +26,9 @@ void logsCallback(NSString *newLog, NSString *allLogs, LOG_LEVEL log_level) {
 
 @interface ViewController () <UITextViewDelegate>
 
+@property (weak, nonatomic) IBOutlet UIButton *findUsersButton;
+@property (weak, nonatomic) IBOutlet UIButton *myContactsButton;
+@property (weak, nonatomic) IBOutlet UIButton *signOutButton;
 @property (weak, nonatomic) IBOutlet UIButton *contactRequestsButton;
 
 @end
@@ -70,6 +73,12 @@ void logsCallback(NSString *newLog, NSString *allLogs, LOG_LEVEL log_level) {
     self.daConsole.text = wlogs;
     NSRange bottom = NSMakeRange(self.daConsole.text.length - 1, 1);
     [self.daConsole scrollRangeToVisible:bottom];
+    [self.findUsersButton.titleLabel setTextAlignment:NSTextAlignmentCenter];
+    self.findUsersButton.titleLabel.numberOfLines = 2;
+    [self.myContactsButton.titleLabel setTextAlignment:NSTextAlignmentCenter];
+    self.myContactsButton.titleLabel.numberOfLines = 2;
+    [self.signOutButton.titleLabel setTextAlignment:NSTextAlignmentCenter];
+    self.signOutButton.titleLabel.numberOfLines = 2;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -83,13 +92,6 @@ void logsCallback(NSString *newLog, NSString *allLogs, LOG_LEVEL log_level) {
     }
 }
 
-- (IBAction)tapPing:(id)sender {
-    printf("tapPing\n");
-    ((UIButton *)sender).backgroundColor = [UIColor purpleColor];
-    char *w = send_ping();
-    wlog2(w, INFO_LOG);
-}
-
 - (IBAction)tapSendMessageAllPeers:(id)sender {
     ((UIButton *)sender).backgroundColor = [UIColor purpleColor];
     wlog2("tapPingAllPeers", INFO_LOG);
@@ -99,7 +101,6 @@ void logsCallback(NSString *newLog, NSString *allLogs, LOG_LEVEL log_level) {
 }
 
 - (IBAction)tapListContacts:(id)sender {
-    ((UIButton *)sender).backgroundColor = [UIColor purpleColor];
     wlog2("tapListContacts", INFO_LOG);
     for (ObjcContact *oc in arrContacts) {
         char w[256];
@@ -126,6 +127,7 @@ void logsCallback(NSString *newLog, NSString *allLogs, LOG_LEVEL log_level) {
           aes_key_created,
           aes_response,
           creds_check_result,
+          server_connection_failure,
           general);
     UINavigationController *nc = self.navigationController;
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];

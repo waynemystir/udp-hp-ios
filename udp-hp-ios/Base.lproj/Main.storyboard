@@ -187,61 +187,56 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Jm-cf-7VH">
                                 <rect key="frame" x="16" y="28" width="343" height="50"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rFg-R3-bWo">
-                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="sAr-pp-KZg">
+                                        <rect key="frame" x="0.0" y="0.0" width="80" height="50"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                        <state key="normal" title="Ping"/>
-                                        <connections>
-                                            <action selector="tapPing:" destination="BYZ-38-t0r" eventType="touchUpInside" id="tjF-z2-mz2"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sAr-pp-KZg">
-                                        <rect key="frame" x="55" y="0.0" width="50" height="50"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                        <state key="normal" title="SU"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                        <state key="normal">
+                                            <string key="title">Find
+Users</string>
+                                        </state>
                                         <connections>
                                             <segue destination="1Nm-y3-ZAj" kind="show" id="u6b-hT-poT"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7eF-hi-mCu">
-                                        <rect key="frame" x="110" y="0.0" width="50" height="50"/>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="BGu-sO-rg3">
+                                        <rect key="frame" x="86" y="0.0" width="80" height="50"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                        <state key="normal" title="SMaP"/>
-                                        <connections>
-                                            <action selector="tapSendMessageAllPeers:" destination="BYZ-38-t0r" eventType="touchUpInside" id="w7B-Mo-GiO"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BGu-sO-rg3">
-                                        <rect key="frame" x="165" y="0.0" width="50" height="50"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                        <state key="normal" title="LC"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                        <state key="normal">
+                                            <string key="title">My
+Contacts</string>
+                                        </state>
                                         <connections>
                                             <action selector="tapListContacts:" destination="BYZ-38-t0r" eventType="touchUpInside" id="xG1-Ao-gmN"/>
                                             <segue destination="rKX-D0-A0P" kind="show" identifier="showSegueListContacts" id="zbV-dL-Xic"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h9n-Sf-g5u">
-                                        <rect key="frame" x="220" y="0.0" width="50" height="50"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="h9n-Sf-g5u">
+                                        <rect key="frame" x="292" y="0.0" width="50" height="50"/>
                                         <color key="backgroundColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                        <state key="normal" title="LO"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="GaN-0x-MCG"/>
+                                            <constraint firstAttribute="width" constant="50" id="Xub-7f-5Uu"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                        <state key="normal">
+                                            <string key="title">Sign
+Out</string>
+                                        </state>
                                         <connections>
                                             <action selector="tapLogOut:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Kgl-Sr-nrY"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kEU-rG-6pv">
-                                        <rect key="frame" x="275" y="0.0" width="50" height="50"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kEU-rG-6pv">
+                                        <rect key="frame" x="235" y="0.0" width="50" height="50"/>
                                         <color key="backgroundColor" red="1" green="0.026458263320000001" blue="0.1187341936" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="o7o-KH-d0l"/>
+                                            <constraint firstAttribute="width" constant="50" id="x43-Wy-nR0"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                         <state key="normal" title="CR"/>
                                         <connections>
@@ -252,6 +247,12 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="17g-Bh-dNb"/>
+                                    <constraint firstItem="kEU-rG-6pv" firstAttribute="top" secondItem="2Jm-cf-7VH" secondAttribute="top" id="A3d-xi-WXi"/>
+                                    <constraint firstAttribute="trailing" secondItem="h9n-Sf-g5u" secondAttribute="trailing" constant="1" id="BfY-OV-lLu"/>
+                                    <constraint firstItem="h9n-Sf-g5u" firstAttribute="leading" secondItem="kEU-rG-6pv" secondAttribute="trailing" constant="7" id="LCm-3t-c1U"/>
+                                    <constraint firstItem="h9n-Sf-g5u" firstAttribute="top" secondItem="2Jm-cf-7VH" secondAttribute="top" id="Slh-Of-1yC"/>
+                                    <constraint firstAttribute="bottom" secondItem="kEU-rG-6pv" secondAttribute="bottom" id="iJx-P8-9qI"/>
+                                    <constraint firstAttribute="bottom" secondItem="h9n-Sf-g5u" secondAttribute="bottom" id="vba-nz-1GB"/>
                                 </constraints>
                             </view>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="App started" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="BZD-W5-LFc">
@@ -276,6 +277,9 @@
                     <connections>
                         <outlet property="contactRequestsButton" destination="kEU-rG-6pv" id="nfB-Ej-0gW"/>
                         <outlet property="daConsole" destination="BZD-W5-LFc" id="yEI-jl-XRY"/>
+                        <outlet property="findUsersButton" destination="sAr-pp-KZg" id="M0O-N2-GqR"/>
+                        <outlet property="myContactsButton" destination="BGu-sO-rg3" id="c4P-V3-h3y"/>
+                        <outlet property="signOutButton" destination="h9n-Sf-g5u" id="L0H-Hc-gsx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

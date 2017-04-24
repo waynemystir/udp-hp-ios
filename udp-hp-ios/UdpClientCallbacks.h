@@ -9,19 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "udp_client.h"
 
-typedef enum ENVIRONMENT {
-    DEV = 0,
-    PROD = 1,
-} ENVIRONMENT;
-
-typedef enum LOG_LEVEL {
-    DEBUG_LOG = 0,
-    INFO_LOG = 1,
-    WARNING_LOG = 2,
-    SEVERE_LOG = 3,
-} LOG_LEVEL;
-
-void init_environment();
+void init_app_settings();
 
 extern NSMutableArray *arrContacts;
 
@@ -90,7 +78,9 @@ void video_start(char *server_host_url, char *room_id);
 
 void unhandled_response_from_server(int w);
 
-void general(char *w);
+void server_connection_failure(SERVER_TYPE, char*);
+
+void general(char *w, LOG_LEVEL);
 
 @interface UdpClientCallbacks : NSObject
 

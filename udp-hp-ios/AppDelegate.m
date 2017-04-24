@@ -23,7 +23,7 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    init_environment();
+    init_app_settings();
     [self letsAuthN];
     
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
@@ -122,6 +122,7 @@
           aes_key_created,
           aes_response,
           creds_check_result,
+          server_connection_failure,
           general);
 }
 
