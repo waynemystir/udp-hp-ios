@@ -79,7 +79,7 @@ void rsakeypair_generated(const char *rsa_pub_key, const char *rsa_pri_key) {
     [AuthN setRSAPubKey:(char*)rsa_pub_key];
     [AuthN setRSAPriKey:(char*)rsa_pri_key];
     char w[2048];
-    sprintf(w, "self_rsa_pub_key_gen (%s) self_rsa_pri_key_gen (%s)", rsa_pub_key, rsa_pri_key);
+    sprintf(w, "self_rsa_pub_key_gen self_rsa_pri_key_gen");
     wlog2(w, NO_UI_LOG);
 }
 
