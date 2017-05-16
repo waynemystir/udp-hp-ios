@@ -76,12 +76,14 @@
 - (void)handleIncomingCall:(NSNotification*)notification {
     NSString *serverUrl = [notification.userInfo objectForKey:@"server_host_url"];
     NSString *roomId = [notification.userInfo objectForKey:@"room_id"];
+    NSString *fromusername = [notification.userInfo objectForKey:@"fromusername"];
     
     dispatch_async(dispatch_get_main_queue(), ^{
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         IncomingCallViewController *icvc = [storyboard instantiateViewControllerWithIdentifier:@"sbidIncomingCallVC"];
         icvc.videoUrl = serverUrl;
         icvc.roomId = roomId;
+        icvc.fromusername = fromusername;
         UINavigationController *nc = (UINavigationController *)self.window.rootViewController;
         [nc pushViewController:icvc animated:YES];
     });
@@ -116,6 +118,7 @@
           [AuthN getRSAPriKey],
           [AuthN getAESKey],
           pfail_bc,
+          connectivity,
           rsakeypair_generated,
           recd,
           rsa_response,

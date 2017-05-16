@@ -20,7 +20,7 @@ static pthread_mutex_t wLogsLock;
 int tErr;
 
 void init_environment() {
-    set_environment(ENV_PROD);
+    set_environment(ENV_DEV);
 }
 
 void init_mutexes() {
@@ -63,15 +63,24 @@ void wlog2(char *log, LOG_LEVEL log_level) {
     }
 
     NSString *newLog = [NSString stringWithUTF8String:w];
-    wLogs = [wLogs stringByAppendingString:newLog];
-    for (WlogDelegate *d in delegates)
-        if (d.callback) d.callback(newLog, wLogs, log_level);
+    if (newLog) {
+        wLogs = [wLogs stringByAppendingString:newLog];
+        for (WlogDelegate *d in delegates)
+            if (d.callback) d.callback(newLog, wLogs, log_level);
+    }
     pthread_mutex_unlock(&wLogsLock);
 }
 
 void pfail_bc(char *err_msg) {
     char w[256];
     sprintf(w, "PFFFFFFFFFFFFAILLLLLLLLL (%s)", err_msg);
+    wlog2(w, SEVERE_LOG);
+}
+
+void connectivity(IF_ADDR_PREFFERED ifpref, int result) {
+    char *f = if_addr_pref_to_str(ifpref);
+    char w[256];
+    sprintf(w, "CONNECTIVITY (%s)(%s)(%d)", f, result > 0 ? "GOOD" : "NOPE", result);
     wlog2(w, SEVERE_LOG);
 }
 
@@ -287,11 +296,11 @@ void contact_request_declined(char *username) {
 }
 
 void new_peer(char *w) {
-    wlog2(w, INFO_LOG);
+    wlog2(w, SEVERE_LOG);
 }
 
 void proceed_chat_hp(char *w) {
-    wlog2(w, INFO_LOG);
+    wlog2(w, SEVERE_LOG);
 }
 
 void hole_punch_sent(char *w, int t) {
@@ -336,10 +345,11 @@ void chat_msg(char *username, char *msg) {
     wlog2(e, INFO_LOG);
 }
 
-void video_start(char *server_host_url, char *room_id) {
+void video_start(char *server_host_url, char *room_id, char *fromusername) {
     NSDictionary *d = @{
                         @"server_host_url":[NSString stringWithUTF8String:server_host_url],
-                        @"room_id":[NSString stringWithUTF8String:room_id]
+                        @"room_id":[NSString stringWithUTF8String:room_id],
+                        @"fromusername":[NSString stringWithUTF8String:fromusername]
                         };
     [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationIncomingCall object:nil userInfo:d];
     char w[256];

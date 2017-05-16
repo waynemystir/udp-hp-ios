@@ -19,7 +19,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    self.usernameLabel.text = self.fromusername;
 }
 
 - (IBAction)tapAnswer:(id)sender {

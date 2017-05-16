@@ -63,15 +63,30 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="go" secureTextEntry="YES"/>
                             </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7mX-hc-udX">
+                                <rect key="frame" x="82" y="244" width="212" height="30"/>
+                                <color key="backgroundColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="0E2-c5-PmL"/>
+                                    <constraint firstAttribute="width" constant="212" id="ubT-t9-Z3Q"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <state key="normal" title="Create Account"/>
+                                <connections>
+                                    <action selector="tapCreateAccount:" destination="yo1-zx-6Ch" eventType="touchUpInside" id="cI3-MS-vxs"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="PAk-rg-Pm1" firstAttribute="centerX" secondItem="70K-bg-cZg" secondAttribute="centerX" id="0Ul-zb-NK9"/>
                             <constraint firstItem="70K-bg-cZg" firstAttribute="top" secondItem="lAT-J3-gfQ" secondAttribute="bottom" constant="42" id="K8C-KL-RYP"/>
+                            <constraint firstItem="7mX-hc-udX" firstAttribute="top" secondItem="zP1-QE-a6W" secondAttribute="bottom" constant="29" id="Km7-pQ-er7"/>
                             <constraint firstItem="PAk-rg-Pm1" firstAttribute="top" secondItem="70K-bg-cZg" secondAttribute="bottom" constant="31" id="caw-aQ-O6L"/>
                             <constraint firstItem="PAk-rg-Pm1" firstAttribute="leading" secondItem="zP1-QE-a6W" secondAttribute="leading" id="cjH-uG-4Eq"/>
                             <constraint firstItem="zP1-QE-a6W" firstAttribute="top" secondItem="PAk-rg-Pm1" secondAttribute="bottom" constant="22" id="eMY-BW-ML6"/>
                             <constraint firstAttribute="trailing" secondItem="70K-bg-cZg" secondAttribute="trailing" id="iwD-wf-HK5"/>
+                            <constraint firstItem="7mX-hc-udX" firstAttribute="centerX" secondItem="Wnr-rb-wXE" secondAttribute="centerX" id="jOn-UA-bal"/>
                             <constraint firstItem="PAk-rg-Pm1" firstAttribute="trailing" secondItem="zP1-QE-a6W" secondAttribute="trailing" id="k1Q-NC-KtY"/>
                             <constraint firstItem="70K-bg-cZg" firstAttribute="leading" secondItem="Wnr-rb-wXE" secondAttribute="leading" id="wFD-5j-hqg"/>
                             <constraint firstItem="zP1-QE-a6W" firstAttribute="top" secondItem="PAk-rg-Pm1" secondAttribute="bottom" constant="22" id="xqU-2b-fwA"/>
@@ -84,7 +99,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mUf-Xg-tnR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-679" y="-690"/>
+            <point key="canvasLocation" x="-679.20000000000005" y="-690.40479760119945"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="LM9-e6-lTE">

@@ -14,6 +14,7 @@
 
 @property (weak, nonatomic) IBOutlet UITextField *usernameTextfield;
 @property (weak, nonatomic) IBOutlet UITextField *passwordTextfield;
+
 @end
 
 @implementation CreateAccountViewController
@@ -77,13 +78,39 @@
     if (textField == self.usernameTextfield) {
         [self.passwordTextfield becomeFirstResponder];
     } else if (textField == self.passwordTextfield) {
-        if ([self.usernameTextfield.text length] && [self.passwordTextfield.text length]) {
-            send_user(NODE_USER_STATUS_NEW_USER,
-                      (char*)[self.usernameTextfield.text UTF8String],
-                      (char*)[self.passwordTextfield.text UTF8String]);
-        }
+        [self letsCreateAccount];
     }
     return YES;
+}
+
+- (IBAction)tapCreateAccount:(id)sender {
+    [self letsCreateAccount];
+}
+
+- (void)letsCreateAccount {
+    if ([self.usernameTextfield.text length] && [self.passwordTextfield.text length]) {
+        send_user(NODE_USER_STATUS_NEW_USER,
+                  (char*)[self.usernameTextfield.text UTF8String],
+                  (char*)[self.passwordTextfield.text UTF8String]);
+    } else if (![self.usernameTextfield.text length]) {
+        UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"Empty username" message:@"Please enter a username" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *aa = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            ;
+        }];
+        [ac addAction:aa];
+        [self presentViewController:ac animated:YES completion:^{
+            ;
+        }];
+    } else {
+        UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"Empty password" message:@"Please enter a password" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *aa = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            ;
+        }];
+        [ac addAction:aa];
+        [self presentViewController:ac animated:YES completion:^{
+            ;
+        }];
+    }
 }
 
 /*

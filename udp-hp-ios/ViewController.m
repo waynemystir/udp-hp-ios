@@ -121,6 +121,7 @@ void logsCallback(NSString *newLog, NSString *allLogs, LOG_LEVEL log_level) {
           [AuthN getRSAPriKey],
           [AuthN getAESKey],
           pfail_bc,
+          connectivity,
           rsakeypair_generated,
           recd,
           rsa_response,

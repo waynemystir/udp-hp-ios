@@ -21,6 +21,8 @@ void wlog2(char *log, LOG_LEVEL log_level);
 
 void pfail_bc(char *err_msg);
 
+void connectivity(IF_ADDR_PREFFERED, int);
+
 void rsakeypair_generated(const char *rsa_pub_key, const char *rsa_pri_key);
 
 void rsa_response(char *server_rsa_key);
@@ -74,7 +76,7 @@ void from_peer(SERVER_TYPE st, char *w);
 
 void chat_msg(char *username, char *msg);
 
-void video_start(char *server_host_url, char *room_id);
+void video_start(char *server_host_url, char *room_id, char *fromusername);
 
 void unhandled_response_from_server(int w);
 

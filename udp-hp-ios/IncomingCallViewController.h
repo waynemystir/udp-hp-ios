@@ -12,5 +12,6 @@
 
 @property (nonatomic, strong) NSString *videoUrl;
 @property (nonatomic, strong) NSString *roomId;
+@property (nonatomic, strong) NSString *fromusername;
 
 @end
