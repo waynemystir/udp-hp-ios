@@ -20,7 +20,7 @@ static pthread_mutex_t wLogsLock;
 int tErr;
 
 void init_environment() {
-    set_environment(ENV_DEV);
+    set_environment(ENV_PROD);
 }
 
 void init_mutexes() {
