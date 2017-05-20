@@ -24,6 +24,14 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     init_app_settings();
+    NSString * appVersionString = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
+    NSString * appBuildString = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"];
+    char env_str[20] = {0};
+    get_environment_as_str(env_str);
+    char wes[512] = {0};
+    sprintf(wes, "VERSION(%s) BUILD(%s) ENV(%s) MHPRA(%d)", [appVersionString UTF8String], [appBuildString UTF8String], env_str, MAX_HOLE_PUNCH_RETRY_ATTEMPTS);
+    wlog2(wes, SEVERE_LOG);
+    
     [self letsAuthN];
     
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
