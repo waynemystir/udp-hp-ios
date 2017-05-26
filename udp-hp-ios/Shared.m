@@ -10,6 +10,7 @@
 
 NSString *chatHistory = @"";
 
+NSString * const kNotificationReadyToSendUser = @"kNotificationReadyToSendUser";
 NSString * const kNotificationCredentialsCheckResult = @"kNotificationCredentialsCheckResult";
 NSString * const kNotificationAddContactRequest = @"kNotificationAddContactRequest";
 NSString * const kNotificationContactRequestAccepted = @"kNotificationContactRequestAccepted";

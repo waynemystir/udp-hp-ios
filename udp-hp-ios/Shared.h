@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
+extern NSString * const kNotificationReadyToSendUser;
 extern NSString * const kNotificationCredentialsCheckResult;
 extern NSString * const kNotificationAddContactRequest;
 extern NSString * const kNotificationContactRequestAccepted;

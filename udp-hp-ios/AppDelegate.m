@@ -117,24 +117,23 @@
 }
 
 - (void)letsAuthN {
+    NSString *liltun = [AuthN loggedInLastTimeUserName];
+    if (!liltun) return;
+    NSString *pw = [AuthN getPasswordForUsername:liltun];
+    if (!pw) return;
     NODE_USER_STATUS nus = [AuthN loggedInLastTimeUserName] ? NODE_USER_STATUS_EXISTING_USER : NODE_USER_STATUS_UNKNOWN;
-    authn(nus,
-          [[AuthN loggedInLastTimeUserName] UTF8String],
-          [[AuthN getPasswordForUsername:[AuthN loggedInLastTimeUserName]] UTF8String],
+    authn(nus, [liltun UTF8String], [pw UTF8String],
           AUTHN_STATUS_RSA_SWAP,
           [AuthN getRSAPubKey],
           [AuthN getRSAPriKey],
           [AuthN getAESKey],
-          pfail_bc,
-          connectivity,
           rsakeypair_generated,
           recd,
           rsa_response,
           aes_key_created,
           aes_response,
           creds_check_result,
-          server_connection_failure,
-          general);
+          server_connection_failure);
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

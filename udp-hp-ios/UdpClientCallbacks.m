@@ -30,6 +30,7 @@ void init_mutexes() {
 void init_app_settings() {
     pthread_once(&env_once, init_environment);
     pthread_once(&mutexes_once, init_mutexes);
+    init(pfail_bc, connectivity, general);
 }
 
 @interface WlogDelegate : NSObject
@@ -108,7 +109,9 @@ void aes_key_created(unsigned char *aes_key) {
 void aes_response(NODE_USER_STATUS nus) {
     char w[256];
     sprintf(w, "aes_response (%s)", node_user_status_to_str(nus));
-    wlog2(w, NO_UI_LOG);
+    wlog2(w, SEVERE_LOG);
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationReadyToSendUser object:nil];
     
     NODE_USER_STATUS nusf = [AuthN loggedInLastTimeUserName] ? NODE_USER_STATUS_EXISTING_USER : NODE_USER_STATUS_UNKNOWN;
     char *username = (char*)[[AuthN loggedInLastTimeUserName] UTF8String];
