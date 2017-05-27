@@ -30,7 +30,7 @@ void init_mutexes() {
 void init_app_settings() {
     pthread_once(&env_once, init_environment);
     pthread_once(&mutexes_once, init_mutexes);
-    init(pfail_bc, connectivity, general);
+    init(pfail_bc, connectivity, self_info, general);
 }
 
 @interface WlogDelegate : NSObject
@@ -127,8 +127,7 @@ void creds_check_result(AUTHN_CREDS_CHECK_RESULT cr, char *username,
             [AuthN addUsername:[NSString stringWithUTF8String:username]
                    andPassword:[NSString stringWithUTF8String:password]];
             [AuthN setLoggedInLastTimeUserName:[NSString stringWithUTF8String:username]];
-            wain(self_info,
-                 server_info,
+            wain(server_info,
                  socket_created,
                  socket_bound,
                  sendto_succeeded,
