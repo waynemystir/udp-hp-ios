@@ -142,6 +142,8 @@ void creds_check_result(AUTHN_CREDS_CHECK_RESULT cr, char *username,
                  contact_request_declined,
                  new_peer,
                  proceed_chat_hp,
+                 hole_punch_thrd,
+                 hole_punch_sent_p1,
                  hole_punch_sent,
                  confirmed_peer_while_punching,
                  from_peer,
@@ -305,11 +307,22 @@ void proceed_chat_hp(char *w) {
     wlog2(w, SEVERE_LOG);
 }
 
+void hole_punch_thrd(char *w){
+    wlog2(w, SEVERE_LOG);
+}
+
+void hole_punch_sent_p1(char *w, int t) {
+    char wc [256];
+    sprintf(wc, "%s count %d", w, t);
+    int modulo = t % 40;
+    wlog2(wc, !modulo ? SEVERE_LOG : NO_UI_LOG);
+}
+
 void hole_punch_sent(char *w, int t) {
     char wc [256];
     sprintf(wc, "%s count %d", w, t);
     int modulo = t % 40;
-    wlog2(wc, !modulo ? INFO_LOG : NO_UI_LOG);
+    wlog2(wc, !modulo ? SEVERE_LOG : NO_UI_LOG);
 }
 
 void confirmed_peer_while_punching(SERVER_TYPE st) {

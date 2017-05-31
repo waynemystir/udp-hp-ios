@@ -68,6 +68,10 @@ void new_peer(char *w);
 
 void proceed_chat_hp(char *);
 
+void hole_punch_thrd(char *w);
+
+void hole_punch_sent_p1(char *w, int t);
+
 void hole_punch_sent(char *w, int t);
 
 void confirmed_peer_while_punching(SERVER_TYPE st);

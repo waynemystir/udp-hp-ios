@@ -9,6 +9,8 @@
 #import "CreateAccountViewController.h"
 #import "udp_client.h"
 #import "Shared.h"
+#import "AuthN.h"
+#import "UdpClientCallbacks.h"
 
 @interface CreateAccountViewController () <UITextFieldDelegate>
 
@@ -29,12 +31,20 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     self.navigationController.navigationBarHidden = YES;
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(credsCheckResultNotification:) name:kNotificationCredentialsCheckResult object:nil];
+    NSNotificationCenter *ndc = [NSNotificationCenter defaultCenter];
+    [ndc addObserver:self selector:@selector(letsSendUser:) name:kNotificationReadyToSendUser object:nil];
+    [ndc addObserver:self selector:@selector(credsCheckResultNotification:) name:kNotificationCredentialsCheckResult object:nil];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)letsSendUser:(NSNotification*)n {
+    send_user(NODE_USER_STATUS_NEW_USER,
+              (char*)[self.usernameTextfield.text UTF8String],
+              (char*)[self.passwordTextfield.text UTF8String]);
 }
 
 - (void)credsCheckResultNotification:(NSNotification *)notification {
@@ -89,9 +99,23 @@
 
 - (void)letsCreateAccount {
     if ([self.usernameTextfield.text length] && [self.passwordTextfield.text length]) {
-        send_user(NODE_USER_STATUS_NEW_USER,
-                  (char*)[self.usernameTextfield.text UTF8String],
-                  (char*)[self.passwordTextfield.text UTF8String]);
+//        send_user(NODE_USER_STATUS_NEW_USER,
+//                  (char*)[self.usernameTextfield.text UTF8String],
+//                  (char*)[self.passwordTextfield.text UTF8String]);
+        authn(NODE_USER_STATUS_NEW_USER,
+              (char*)[self.usernameTextfield.text UTF8String],
+              (char*)[self.passwordTextfield.text UTF8String],
+              AUTHN_STATUS_RSA_SWAP,
+              [AuthN getRSAPubKey],
+              [AuthN getRSAPriKey],
+              [AuthN getAESKey],
+              rsakeypair_generated,
+              recd,
+              rsa_response,
+              aes_key_created,
+              aes_response,
+              creds_check_result,
+              server_connection_failure);
     } else if (![self.usernameTextfield.text length]) {
         UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"Empty username" message:@"Please enter a username" preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *aa = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
